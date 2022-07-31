@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState,useEffect }from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
-import { useState,useEffect } from 'react'
 import { findOneProduct, updateProduct } from '../../../functions/product';
 import Swal from 'sweetalert2';
 export default function ProductUpdate() {
@@ -58,7 +57,7 @@ export default function ProductUpdate() {
 
      }
     return(
-        <div>
+        <div style={{marginLeft: "1rem"}}>
             <h1>ProductUpdate</h1>
             <div className='container-fluid'>
             <form className='form' onSubmit={handleSubmit}>
