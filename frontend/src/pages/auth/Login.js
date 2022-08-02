@@ -29,11 +29,16 @@ export default function Login() {
     // };
 
     const positionBaseRedirect = (position) => {
-        if(position === 'Warehouse Supervisor'){
+        // if(position === 'Warehouse Supervisor'){
+        //     navigate('/admin/index')
+        //   }else {
+        //     navigate('/user/index')
+        //   }
+        if(position === 'Manager'){
             navigate('/admin/index')
-          }else {
-            navigate('/user/index')
-          }
+        }else {
+            navigate('user/index')
+        }
     }
 
     const handleChange = (e) => {

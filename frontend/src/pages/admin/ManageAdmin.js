@@ -92,7 +92,8 @@ export default function ManagaAdmin() {
     // }
 
     const roleData = ['admin', 'user']
-    const positionData = ['Warehouse Supervisor', 'Warehouse Staff']
+    // const positionData = ['Warehouse Supervisor', 'Warehouse Staff']
+    const positionData = ['Manager', 'Warehouse Staff']
 
     // const handleChangeRole = (e, _id) => {
     //     const value = {
@@ -215,7 +216,7 @@ export default function ManagaAdmin() {
                                 >
                                     {positionData.map((position, index) => (
                                         <Select.Option value={position} key={index}>
-                                            {position === 'Warehouse Supervisor'
+                                            {position === 'Manager'
                                             ? <Tag color={"green"}>{position}</Tag>
                                             : <Tag color={"red"}>{position}</Tag>
                                             }
