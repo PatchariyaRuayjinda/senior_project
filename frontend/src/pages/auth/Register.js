@@ -140,25 +140,25 @@ export default function Register() {
                                       </div>
                                       <div class="col-12">
                                           <div class="form-group position-relative">
-                                              <span class="zmdi zmdi-email"></span>
+                                              <span class="zmdi zmdi-key"></span>
                                               <input type="password" name='password' class="form-control" placeholder="Password" onChange={handleChange} required/>
                                           </div>
                                       </div>
                                       <div class="col-12">
                                           <div class="form-group position-relative">
-                                              <span class="zmdi zmdi-email"></span>
+                                              <span class="zmdi zmdi-key"></span>
                                               <input type="password" name='confirmPassword' class="form-control" placeholder="confirm Password" onChange={handleChange} required/>
                                           </div>
                                       </div>
                                       <div class="col-12">
                                           <div class="form-group position-relative">
-                                              <span class="zmdi zmdi-email"></span>
+                                              <span class="zmdi zmdi-account"></span>
                                               <input type="text" name='firstname' class="form-control" placeholder="firstname" onChange={handleChange} required/>
                                           </div>
                                       </div>
                                       <div class="col-12">
                                           <div class="form-group position-relative">
-                                              <span class="zmdi zmdi-email"></span>
+                                              <span class="zmdi zmdi-account"></span>
                                               <input type="text" name='surname' class="form-control" placeholder="surname" onChange={handleChange} required/>
                                           </div>
                                       </div>
