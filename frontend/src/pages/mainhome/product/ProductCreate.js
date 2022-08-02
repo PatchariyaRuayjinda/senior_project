@@ -22,11 +22,15 @@ export default function ProductCreate() {
   });
 
   const handleChangeProduct = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setProduct({...product,
+      [e.target.name]: e.target.value 
+    });
   };
 
   const handleChangeProductDetail = (e) => {
-    setProductDetail({ ...productDetail, [e.target.name]: e.target.value });
+    setProductDetail({...productDetail, 
+      [e.target.name]: e.target.value 
+    });
   };
 
   
@@ -48,6 +52,11 @@ export default function ProductCreate() {
       })
       .catch((err) => {
         console.log(err.response);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.response.data
+        })
       });
     // await addProduct(product)
     // .then( async(res) => {
@@ -81,28 +90,20 @@ export default function ProductCreate() {
         Swal.fire("แจ้งเตือน", err.response.data, "error");
       });
   };
+
   return (
     <div className="container-fluid">
       <form className="form" onSubmit={handleSubmit}>
         <h1>CreateProduct</h1>
         <div className="container col-4">
-          <div
-            className="card caed-ui shadow-lg p-3 mb-4 bg-body rounded"
-            style={{ margin: "0.3rem" }}
-          >
+          <div className="card caed-ui shadow-lg p-3 mb-4 bg-body rounded" style={{ margin: "0.3rem" }}>
             <div className="card-body fontDivCreate">
               <h3 className="shadow-text mb-4">Product</h3>
               <div className="marginDiv">
                 <span> Product </span>
               </div>
               <div>
-                <input
-                  className="rounded-pill border-1 form-control"
-                  type="text"
-                  name="productName"
-                  placeholder="Please. Enter product name."
-                  onChange={handleChangeProduct}
-                />
+                <input className="rounded-pill border-1 form-control" type="text" name="productName" placeholder="Please. Enter product name." onChange={handleChangeProduct} />
               </div>
               {/* <div style={{marginBottom: "0.3rem"}}>
                                 <span> Quantity </span>
@@ -151,21 +152,15 @@ export default function ProductCreate() {
                 <span> Expire date </span>
               </div>
               <div>
-                <input
-                  className="rounded-pill border-1 form-control"
-                  type="text"
-                  name="expireDate"
-                  placeholder="Please. Enter the expireDate."
-                  onChange={handleChangeProductDetail}
-                />
+                <input className="rounded-pill border-1 form-control" type="text" name="expireDate" placeholder="Please. Enter the expireDate." onChange={handleChangeProductDetail} />
               </div>
-              <button
-                type="submit"
-                className="btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3"
-              >
-                {" "}
-                Submit{" "}
-              </button>
+              <div className="marginDiv">
+                <span> Total Quantity </span>
+              </div>
+              <div>
+                <input className="rounded-pill border-1 form-control" type="text" name="totalQuantity" placeholder="0" value={productDetail.receiveQuantity}/>
+              </div>
+              <button type="submit" className="btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3" >Submit</button>
             </div>
           </div>
         </div>

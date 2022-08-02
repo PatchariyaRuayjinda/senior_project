@@ -92,7 +92,8 @@ export default function ManagaAdmin() {
     // }
 
     const roleData = ['admin', 'user']
-    const positionData = ['Warehouse Supervisor', 'Warehouse Staff']
+    // const positionData = ['Warehouse Supervisor', 'Warehouse Staff']
+    const positionData = ['Manager', 'Warehouse Staff']
 
     // const handleChangeRole = (e, _id) => {
     //     const value = {
@@ -181,12 +182,12 @@ export default function ManagaAdmin() {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">username</th>
-                            <th scope="col">position</th>
+                            <th scope="col">Username</th>
+                            <th scope="col" style={{textAlign: 'center'}}>Position</th>
                             {/* <th scope="col">status</th> */}
-                            <th scope="col">created</th>
-                            <th scope="col">updated</th>
-                            <th scope="col">actions</th>
+                            <th scope="col">Created at</th>
+                            <th scope="col">Last Login/Update</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,13 +210,13 @@ export default function ManagaAdmin() {
                                         }
                                 </Select> */}
                                 <Select
-                                style={{width:'55%'}}
+                                style={{width:'100%'}}
                                 value={item.position}
                                 onChange={(e) => handleChangePosition(e, item._id)}
                                 >
                                     {positionData.map((position, index) => (
                                         <Select.Option value={position} key={index}>
-                                            {position === 'Warehouse Supervisor'
+                                            {position === 'Manager'
                                             ? <Tag color={"green"}>{position}</Tag>
                                             : <Tag color={"red"}>{position}</Tag>
                                             }

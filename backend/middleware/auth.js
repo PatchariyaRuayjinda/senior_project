@@ -22,7 +22,8 @@ exports.authAdmin = async (req, res, next) => {
         const {username} = req.user
         const adminUser = await user.findOne({username}).exec()
         // if (adminUser.role !== 'admin'){
-        if (adminUser.position !== 'Warehouse Supervisor'){
+        // if (adminUser.position !== 'Warehouse Supervisor'){
+        if(adminUser.position !== 'Manager'){
             res.status(403).send(err,'Access denied')
         } else {
             next()

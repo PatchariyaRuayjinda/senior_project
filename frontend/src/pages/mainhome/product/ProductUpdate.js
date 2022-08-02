@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState,useEffect }from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
-import { useState,useEffect } from 'react'
 import { findOneProduct, updateProduct } from '../../../functions/product';
 import Swal from 'sweetalert2';
+import { Select } from 'antd';
+
 export default function ProductUpdate() {
+    const { Option } = Select;
     const navigate = useNavigate();
     const {id} = useParams()
     const [product,setProduct] = useState({
@@ -26,12 +28,17 @@ export default function ProductUpdate() {
         })
     }, [])
 
-     const handleChange = (e) => {
-         setProduct({...product, 
-           [e.target.name]: e.target.value
-         })
-     }
+    const handleChange = (e) => {
+        setProduct({...product, 
+            [e.target.name]: e.target.value
+        })
+    }
 
+    const handleChangeZone = (e) => {
+        setProduct({...product,
+            group: e
+        })
+    }
 
      const handleSubmit = (e) => {
         // console.log('product', product)
@@ -58,7 +65,7 @@ export default function ProductUpdate() {
 
      }
     return(
-        <div>
+        <div style={{marginLeft: "1rem"}}>
             <h1>ProductUpdate</h1>
             <div className='container-fluid'>
             <form className='form' onSubmit={handleSubmit}>
@@ -88,13 +95,20 @@ export default function ProductUpdate() {
                                 <span> Group </span>
                             </div>
                             <div>
-                                <input className='rounded-pill border-1 form-control' type='text' name='group' value={product.group} onChange={handleChange} required />
+                                {/* <input className='rounded-pill border-1 form-control' type='text' name='group' value={product.group} onChange={handleChange} required /> */}
+                                <Select
+                                style={{width: '100%'}}
+                                value={product.group}
+                                onChange={(e) => handleChangeZone(e)}
+                                >
+                                    <Option value='A'>A</Option>
+                                    <Option value='B'>B</Option>
+                                    <Option value='C'>C</Option>
+                                </Select>
+                            </div>
                             </div>
                              <button type='submit' className='btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3'> Submit </button>
                          </div>
-                       
-                        
-                    </div> 
                 </div>
             </form>
         </div>
