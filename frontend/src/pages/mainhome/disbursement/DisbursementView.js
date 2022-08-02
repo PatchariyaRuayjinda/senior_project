@@ -89,10 +89,10 @@ export default function DisbursementView() {
     <div class='container-fluid'>
     <div class='row'>
       <Sidebar />
-      <div  class='ml col-s-10'>
+      <div  class='ml col-s-9'>
         <div class='row'>
           <h1 class='col-10 mt-3'>Disbursement View</h1>
-          <Link to='/disbursementcreate' class='btn btn-outline-secondary py-0 my-4 btn-lg'>Create</Link> 
+          <Link to='/disbursementcreate' class='btn btn-info py-0 my-4 btn-lg'>Create</Link> 
         </div>
           
           <table class='table table-bordered table-light' >

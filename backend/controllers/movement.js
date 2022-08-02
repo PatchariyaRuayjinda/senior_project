@@ -79,7 +79,7 @@ exports.outMovement = async(req, res) =>{
             momenttotal[i] = productDetail[i].totalQuantity
         }
     }
-    console.log(momenttotal)
+    // console.log(momenttotal)
     for (let index = 0; index < productDetail.length; index++) {
         totalMovement = totalMovement + productDetail[index].totalQuantity;
         // console.log(productDetail[index].totalQuantity ," = ", totalMovement)

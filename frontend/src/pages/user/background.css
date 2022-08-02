@@ -1,7 +1,8 @@
-body{
+body {
     /* background-image: linear-gradient(135deg, rgba(159, 159, 159, 0.46) 0%, rgba(159, 159, 159, 0.46) 14.286%,rgba(165, 165, 165, 0.46) 14.286%, rgba(165, 165, 165, 0.46) 28.572%,rgba(171, 171, 171, 0.46) 28.572%, rgba(171, 171, 171, 0.46) 42.858%,rgba(178, 178, 178, 0.46) 42.858%, rgba(178, 178, 178, 0.46) 57.144%,rgba(184, 184, 184, 0.46) 57.144%, rgba(184, 184, 184, 0.46) 71.43%,rgba(190, 190, 190, 0.46) 71.43%, rgba(190, 190, 190, 0.46) 85.716%,rgba(196, 196, 196, 0.46) 85.716%, rgba(196, 196, 196, 0.46) 100.002%),linear-gradient(45deg, rgb(252, 252, 252) 0%, rgb(252, 252, 252) 14.286%,rgb(246, 246, 246) 14.286%, rgb(246, 246, 246) 28.572%,rgb(241, 241, 241) 28.572%, rgb(241, 241, 241) 42.858%,rgb(235, 235, 235) 42.858%, rgb(235, 235, 235) 57.144%,rgb(229, 229, 229) 57.144%, rgb(229, 229, 229) 71.43%,rgb(224, 224, 224) 71.43%, rgb(224, 224, 224) 85.716%,rgb(218, 218, 218) 85.716%, rgb(218, 218, 218) 100.002%); */
     background-image: url('https://img.freepik.com/premium-photo/concrete-storage-warehouse-with-pallets-shelves-full-goods_103577-5393.jpg?w=2000');
-    background-repeat: no-repeat;
-     background-size: auto;
+    /* background-repeat: no-repeat; */
+    background-size: auto;
+    /* height: 100%; */
     /* background-image: url('https://img.freepik.com/free-photo/warehouse-storage-interior-with-shelves-loaded-with-goods_342744-1484.jpg?w=1800&t=st=1659444297~exp=1659444897~hmac=8952d54a58518c1645b4750412b0d7d66fe05b31b6554b8b87b6038f109313cd'); */
 }
