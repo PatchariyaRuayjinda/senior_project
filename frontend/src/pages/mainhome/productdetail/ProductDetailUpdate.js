@@ -98,10 +98,10 @@ export default function ProductDetailUpdate() {
                                     <input className='rounded-pill border-1 form-control' type='text' name='receiveDate' value={productDetail.receiveDate} onChange={handleChange} required />
                                 </div> */}
                                 <div className='marginDiv'>
-                                    <span> Expire date </span>
+                                    <span> Product </span>
                                 </div>
-                                <div className='marginDiv'>
-                                    <input className='rounded-pill border-1 form-control' type='text' name='expireDate' value={productDetail.expireDate} onChange={handleChange} required />
+                                <div>
+                                    <input className='rounded-pill border-1 form-control' type='text' name='product_id' value={productName} onChange={handleChange} required />
                                 </div>
                                 <div>
                                     <span> Receive Quantity </span>
@@ -110,10 +110,10 @@ export default function ProductDetailUpdate() {
                                     <input className='rounded-pill border-1 form-control' type='text' name='receiveQuantity' value={productDetail.receiveQuantity} onChange={handleChange} required />
                                 </div>
                                 <div className='marginDiv'>
-                                    <span> Product </span>
+                                    <span> Expire date </span>
                                 </div>
-                                <div>
-                                    <input className='rounded-pill border-1 form-control' type='text' name='product_id' value={productName} onChange={handleChange} required />
+                                <div className='marginDiv'>
+                                    <input className='rounded-pill border-1 form-control' type='text' name='expireDate' value={productDetail.expireDate} onChange={handleChange} required />
                                 </div>
                                 <button type='submit' className='btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3'> Submit </button>
                             </div>

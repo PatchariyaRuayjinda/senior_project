@@ -37,7 +37,7 @@ export default function Login() {
         if(position === 'Manager'){
             navigate('/admin/index')
         }else {
-            navigate('user/index')
+            navigate('/user/index')
         }
     }
 
