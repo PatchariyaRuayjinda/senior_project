@@ -17,13 +17,13 @@ import DisbursementView from "./pages/mainhome/disbursement/DisbursementView";
 import DisbursementCreate from "./pages/mainhome/disbursement/DisbursementCreate";
 import DisbursementUpdate from "./pages/mainhome/disbursement/DisbursementUpdate";
 import ShelfView from "./pages/mainhome/shelf/ShelfView";
-import ZoneView from "./pages/mainhome/zone/ZoneView";
-import ZoneCreate from "./pages/mainhome/zone/ZoneCreate";
+// import ZoneView from "./pages/mainhome/zone/ZoneView";
+// import ZoneCreate from "./pages/mainhome/zone/ZoneCreate";
 import ZoneUpdate from "./pages/mainhome/zone/ZoneUpdate";
 import ShelfCreate from "./pages/mainhome/shelf/ShelfCreate";
 import ShelfUpdate from "./pages/mainhome/shelf/ShelfUpdate";
 import InMovement from "./pages/mainhome/product/InMovement";
-
+import ShelfAddProduct from "./pages/mainhome/shelf/ShelfAddProduct";
 // Layout
 import Header from "./components/layout/Header";
 // functions
@@ -34,6 +34,7 @@ import { useDispatch } from "react-redux";
 import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
 import ProductDView from "./pages/mainhome/product/ProductDView";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -185,6 +186,14 @@ function App() {
           element={
             <UserRoute>
               <ShelfUpdate />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/shelfaddproduct"
+          element={
+            <UserRoute>
+              <ShelfAddProduct />
             </UserRoute>
           }
         />

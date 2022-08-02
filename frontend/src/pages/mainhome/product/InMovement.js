@@ -38,13 +38,14 @@ export default function InMovement() {
         <Sidebar />
         <div class="ml col-s-9">
           <div class="row">
-            <h1 className="col-9">ABC analysis</h1>
-            <button className="btn btn-info py-0 my-4 btn-lg" onClick={addGroup}> Add Group ABC </button>
+            <h1 className="col-8">ABC analysis</h1>
+            <button className="btn btn-info py-0 my-4 btn-lg mx-3" onClick={addGroup}>Update product group</button>
+            <button className="btn btn-success py-0 my-4 btn-lg" onClick={''}>Export</button>
           </div>
           <table class="table table-bordered table-light">
             <thead>
               <tr>
-                <th scope="col">PeoductName</th>
+                <th scope="col">ProductName</th>
                 <th scope="col">Movement</th>
                 <th scope="col">%</th>
                 <th scope="col">group</th>

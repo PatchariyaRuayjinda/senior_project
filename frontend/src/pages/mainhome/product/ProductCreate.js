@@ -33,14 +33,14 @@ export default function ProductCreate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const groupABC = ""
+    // const groupABC = "C"
     await axios
       .post(process.env.REACT_APP_API + "/addProduct", {
         productName: product.productName,
         quantity: productDetail.receiveQuantity,
         productStatus: "ปกติ",
         price: product.price,
-        group: groupABC,
+        group: product.group,
       })
       .then(async (res) => {
         const _id = await res.data._id;

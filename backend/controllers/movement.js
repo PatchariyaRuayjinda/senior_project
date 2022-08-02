@@ -24,12 +24,6 @@ exports.outMovement = async(req, res) =>{
             }
         }]).sort({totalQuantity:-1})
         const productDetail = await ProductDetail.aggregate([
-            {$lookup:{
-                from: 'products',
-                localField: 'product_id',
-                foreignField: '_id',
-                as: 'product'
-            }},
             {$group:{_id:"$product_id", 
             totalQuantity:
             {
@@ -85,12 +79,12 @@ exports.outMovement = async(req, res) =>{
             momenttotal[i] = productDetail[i].totalQuantity
         }
     }
-
+    console.log(momenttotal)
     for (let index = 0; index < productDetail.length; index++) {
         totalMovement = totalMovement + productDetail[index].totalQuantity;
         // console.log(productDetail[index].totalQuantity ," = ", totalMovement)
     }
-
+    // console.log(totalMovement)
     
     // หาเปอร์เซ็นต์ ABC
     for (let index = 0; index < productDetail.length; index++) {
@@ -100,6 +94,18 @@ exports.outMovement = async(req, res) =>{
         // console.log(productDetail[index].totalQuantity , "จบ")
     }
 
+    // lookup product name
+    producName = []
+    for (let i = 0; i < productDetail.length; i++) {
+        for (let j = 0; j < productDetail2.length; j++) {
+            if(JSON.stringify(productDetail[i]._id) == JSON.stringify(productDetail2[j].product_id)){
+                producName[i] =  productDetail2[j].product[0].productName
+            }
+        }
+        // console.log(producName)
+    }
+    // console.log(producName)
+    // console.log(producName)
     // productDetail.forEach(element => {
     //     console.log(element.totalQuantity)
     // });
@@ -109,32 +115,29 @@ exports.outMovement = async(req, res) =>{
     let scoreA = 80;
     let scoreB = 15;
     for (let index = 0; index < productDetail.length; index++) {
-        for(let i=0 ; i<productDetail2.length ; i++){
-            if(JSON.stringify(productDetail[index]._id) == JSON.stringify(productDetail2[i].product_id)){
                 // console.log("...................")
                 if(scoreA >= 0 && scoreA){
                     scoreA = scoreA - productDetail[index].totalQuantity
-                    productABC.push({_id: productDetail[index]._id , Name: productDetail2[i].product[0].productName , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "A"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "A"})
                     // productDetail[index].totalQuantity = "A"
                     // productDetail.push("A")
                 }else if(scoreB >= 0){
                     scoreB = scoreB - productDetail[index].totalQuantity
                     // console.log(productDetail[index]._id, "B" , productDetail[index].totalQuantity)
-                    productABC.push({_id: productDetail[index]._id , Name: productDetail2[i].product[0].productName , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "B"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "B"})
                     // productDetail[index].totalQuantity = "B"
                 }else{
                     // console.log(productDetail[index]._id, "C" , productDetail[index].totalQuantity)
-                    productABC.push({_id: productDetail[index]._id , Name: productDetail2[i].product[0].productName , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "C"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "C"})
                     // productDetail[index].totalQuantity = "C"
                 }
-            }
-        }
     }
     // console.log(JSON.stringify(productABC[0]._id))
-    console.log(productABC)
+    // console.log(productABC)
     // for (let index = 0; index < productDetail2.length; index++) {
     //         console.log()
     // }
+    // console.log(productABC)
     res.send(productABC)
     
     }catch(err){
