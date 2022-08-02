@@ -64,7 +64,7 @@ export default function Register() {
         // alert(res.data)
       }).catch(err => {
         Swal.fire('แจ้งเตือน',
-        err.response.data,
+        err.response,
         'error')
         console.log(err.response.data)
         // alert(err.response.data)

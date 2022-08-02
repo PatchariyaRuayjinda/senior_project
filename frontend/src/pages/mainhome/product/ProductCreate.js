@@ -52,6 +52,11 @@ export default function ProductCreate() {
       })
       .catch((err) => {
         console.log(err.response);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.response.data
+        })
       });
     // await addProduct(product)
     // .then( async(res) => {
@@ -85,6 +90,7 @@ export default function ProductCreate() {
         Swal.fire("แจ้งเตือน", err.response.data, "error");
       });
   };
+
   return (
     <div className="container-fluid">
       <form className="form" onSubmit={handleSubmit}>
