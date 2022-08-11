@@ -36,7 +36,7 @@ export default function Header() {
         navigate('/')
     }
     return (
-        <div class='container-fluid'>
+        <div class='container-fluid' style={{position: "fixed"}}>
             {/* <div class='fixed-top'> */}
         <Menu mode="horizontal" >
             {!user && <>

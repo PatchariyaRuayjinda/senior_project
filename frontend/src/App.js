@@ -34,6 +34,7 @@ import { useDispatch } from "react-redux";
 import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
 import ProductDView from "./pages/mainhome/product/ProductDView";
+import WithdrawCreate from "./pages/mainhome/disbursement/WithdrawCreate";
 
 
 function App() {
@@ -218,6 +219,14 @@ function App() {
           element={
             <UserRoute>
               <DisbursementCreate />
+            </UserRoute>
+          }
+        />
+        <Route 
+          path="/withdrawcreate"
+          element={
+            <UserRoute>
+              <WithdrawCreate />
             </UserRoute>
           }
         />

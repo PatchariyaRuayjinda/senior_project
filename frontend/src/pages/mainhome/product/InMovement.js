@@ -36,7 +36,7 @@ export default function InMovement() {
     <div className="container-fluid">
       <div class="row">
         <Sidebar />
-        <div class="ml col-s-9">
+        <div class="ml col-s-9 mt-5">
           <div class="row">
             <h1 className="col-8">ABC analysis</h1>
             <button className="btn btn-info py-0 my-4 btn-lg mx-3" onClick={addGroup}>Update product group</button>

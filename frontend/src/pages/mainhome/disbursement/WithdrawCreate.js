@@ -8,8 +8,7 @@ import { findAllProduct, withdraw, disbursement } from '../../../functions/produ
 import { useSelector } from 'react-redux';
 import { findUserByName } from '../../../functions/users';
 import { addDisbursement } from '../../../functions/disbursement';
-
-export default function DisbursementCreate() {
+export default function WithdrawCreate() {
     const {user} = useSelector((state) => ({...state}))
     // console.log(user)
     const navigate = useNavigate();
@@ -24,7 +23,7 @@ export default function DisbursementCreate() {
         product_id: "",
         quantity: "",
         date: moment().toISOString(),
-        state: true
+        state: false
     })
 
     const handleChange = (e) => {
@@ -153,18 +152,15 @@ export default function DisbursementCreate() {
             console.log(err.response)
         })
     }
-
     return(
         <div className='container-fluid'>
-            <form className='form' onSubmit={handleSubmit}>
-                <h1>Create Disbursement</h1>
+            <form className='form' onSubmit={handleSubmit} >
+                <h1>Create Withdraw</h1>
                 <div className='container col-4'>
                     <div className='card caed-ui shadow-lg p-3 mb-4 bg-body rounded' style={{margin: "0.3rem"}}>
                         <div className='card-body fontDivCreate'>
                             <div className='text-center'>
-                                <h2 className='text-title'>
-                                    Disbursement
-                                </h2>
+                                <h2 className='card-title'>Withdraw</h2>
                             </div>
                             <div className='marginDiv'>
                                 <span> Username </span>
@@ -192,6 +188,7 @@ export default function DisbursementCreate() {
                             {/* <div>
                                 <input className='rounded-pill border-1 form-control' type='text' name='expireDate' placeholder='Please date the expireDate.'/>
                             </div> */}
+                            {/* <div onChange={handleChangeState} value="เบิกคืน"></div> */}
                             {/* <select name='state' onChange={handleChangeState} required>
                                 <option>เบิกจ่าย</option>
                                 <option>เบิกคืน</option>
@@ -203,4 +200,5 @@ export default function DisbursementCreate() {
             </form>
         </div>
     )
+    
 }

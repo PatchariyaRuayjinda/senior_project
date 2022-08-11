@@ -76,7 +76,7 @@ export default function ProductDetailView() {
     <div class='container-fluid'>
     <div class='row'>
       <Sidebar />
-      <div  class='ml col-s-9'>
+      <div  class='ml col-s-9 mt-5'>
         <div class='row'>
           <h1 class='col-10 mt-3'>ProductDetail View</h1>
           {/* <a href='/productdetailcreate' class='btn btn-info py-0 my-4 btn-lg'>Create</a> */}
