@@ -24,7 +24,7 @@ exports.findAllDisbursement = async(req, res) => {
                     "date": 1,
                     "state": 1,
                     "product.productName": 1,
-                    "user.username": 1
+                    "user.firstname": 1
                 }}
             ]
         )

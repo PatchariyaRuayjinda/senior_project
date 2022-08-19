@@ -99,7 +99,7 @@ export default function DisbursementView() {
             <thead>
               <tr>
                 <th scope='col'>#</th>
-                <th scope='col'>Username</th>
+                <th scope='col'>Name</th>
                 <th scope='col'>Product Name</th>
                 <th scope='col'>Quantity</th>
                 <th scope='col'>Date</th>
@@ -113,7 +113,7 @@ export default function DisbursementView() {
                 <td scope="row">{index +1}</td>
                 {/* <td>{product.user_id}</td> */}
                 {item.user.map((users) => (
-                  <td>{users.username}</td>
+                  <td>{users.firstname}</td>
                 ))} 
                 {/* <td>{product.product_id}</td> */}
                 {/* <td>{product.product[0].productName}</td> */}
