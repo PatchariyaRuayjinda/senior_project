@@ -131,10 +131,10 @@ exports.addProduct = async(req, res) => {
 exports.updateProduct = async(req, res) => {
     try{
         console.log('updateproduct',req.body)
-        const {_id, productName, quantity, price, group } = req.body;
+        const {_id, productName, productStatus, price, group } = req.body;
         var newProudct = {
             productName,
-            quantity,
+            productStatus,
             price,
             group
         }

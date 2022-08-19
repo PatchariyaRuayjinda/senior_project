@@ -2,7 +2,7 @@ import React, { useState,useEffect }from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import { findOneProduct, updateProduct } from '../../../functions/product';
 import Swal from 'sweetalert2';
-import { Select } from 'antd';
+import { Select, Tag } from 'antd';
 
 export default function ProductUpdate() {
     const { Option } = Select;
@@ -11,7 +11,8 @@ export default function ProductUpdate() {
     const [product,setProduct] = useState({
         _id: "",
         productName: "",
-        quantity: "",
+        // quantity: "",
+        productStatus: "",
         price: "",
         group: ""
       })
@@ -40,11 +41,12 @@ export default function ProductUpdate() {
         })
     }
 
-     const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         // console.log('product', product)
-         e.preventDefault()
-          updateProduct(product)
-         .then(res =>{
+        e.preventDefault()
+        // console.log(product)
+        updateProduct(product)
+        .then(res =>{
             console.log(res.data)
             Swal.fire(
                 // 'Product Name: ' + product.productName,
@@ -54,16 +56,24 @@ export default function ProductUpdate() {
                 'success',
                 navigate('/productview')    
             )
-         }).catch(err =>{
+        }).catch(err =>{
             console.log(err.response)
             Swal.fire(
                 'แจ้งเตือน',
                 err.response.data,
                 'error'
             )
-         })
+        })
+    }
+    
+    const statusProduct = ['ปกติ', 'ไม่ใช้งาน']
 
-     }
+    const handleChangeProductStatus = (e) => {
+        setProduct({...product,
+            productStatus: e
+        })
+    }
+
     return(
         <div style={{marginLeft: "1rem"}}>
             <h1>ProductUpdate</h1>
@@ -90,6 +100,25 @@ export default function ProductUpdate() {
                             </div>
                             <div>
                                 <input className='rounded-pill border-1 form-control' type='text' name='price' value={product.price} onChange={handleChange} required />
+                            </div>
+                            <div className='marginDiv'>
+                                <span>Product Status</span>
+                            </div>
+                            <div>
+                                <Select
+                                style={{width: '100%'}}
+                                value={product.productStatus}
+                                onChange={(e) => handleChangeProductStatus(e)}
+                                >
+                                    {statusProduct.map((status, index) => (
+                                        <Select.Option value={status} key={index}>
+                                            {status === 'ปกติ'
+                                            ? <Tag color={"green"}>ปกติ</Tag>
+                                            : <Tag color={"red"}>ไม่ใช้งาน</Tag>
+                                            }
+                                        </Select.Option>
+                                    ))}
+                                </Select>
                             </div>
                             <div>
                                 <span> Group </span>
