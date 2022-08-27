@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState, useCallback } from "react";
 import { outMovement , addGroupABC } from "../../../functions/movement";
 import Sidebar from "../../../components/layout/Sidebar";
+import { Link } from "react-router-dom";
 // import { Link } from 'react-router-dom'
 // import moment from 'moment'
 
@@ -40,7 +41,7 @@ export default function InMovement() {
           <div class="row">
             <h1 className="col-8">ABC analysis</h1>
             <button className="btn btn-info py-0 my-4 btn-lg mx-3" onClick={addGroup}>Update product group</button>
-            <button className="btn btn-success py-0 my-4 btn-lg" onClick={''}>Export</button>
+            <Link to="/export" className="btn btn-success py-0 my-4 btn-lg" >Export</Link>
           </div>
           <table class="table table-bordered table-light">
             <thead>

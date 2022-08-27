@@ -47,7 +47,7 @@ export default function Header() {
 
             {user && <>
                 <Menu.Item key="mail" icon={<HomeOutlined />}>
-                    {user.position === 'Warehouse Supervisor'
+                    {user.position === 'Manager'
                     ? <Link to='/admin/index'>Home</Link>
                     : <Link to='/user/index'>Home</Link>
                     }
@@ -59,10 +59,6 @@ export default function Header() {
             {!user && <>
                 <Menu.Item key="mail" style={{marginLeft: 'auto' }} icon={<LoginOutlined />}>
                     <Link to="/login">Login</Link>
-                </Menu.Item>
-
-                <Menu.Item key="register" icon={<UserAddOutlined />}>
-                    <Link to="/Register">Register</Link>
                 </Menu.Item>
             </>}
             
@@ -78,6 +74,14 @@ export default function Header() {
                 >
                         <Menu.Item key="setting:1" icon={<ProfileOutlined />}>Profile</Menu.Item>
                         <Menu.Item key="setting:2" icon={<LogoutOutlined />} onClick={logout}>logout</Menu.Item>
+                        {user.position === 'Manager' && <>
+                            <Menu.Item key="setting:3" icon={<UserAddOutlined />}>
+                                <Link to="/Register">Register</Link>
+                            </Menu.Item>
+                        </>
+                            
+                        }
+                        
                     {/* <Menu.ItemGroup title="Item-2">
                         <Menu.Item key="setting:3">Option3</Menu.Item>
                         <Menu.Item key="setting:4">Option4</Menu.Item>

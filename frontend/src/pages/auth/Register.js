@@ -60,7 +60,7 @@ export default function Register() {
           'success'
         )
         console.log(res.data)
-        navigate('/login')
+        navigate('/admin/index')
         // alert(res.data)
       }).catch(err => {
         Swal.fire('แจ้งเตือน',
@@ -123,7 +123,7 @@ export default function Register() {
     //   </form>
     // </div>
     <div class="align body">
-      <div class="row">
+      <div class="row" style={{marginTop: "60px"}}>
           <div class="col-md-11 mt-60 mx-md-auto">
               <div class="login-box bg-white pl-0">
                   <div class="row no-gutters align-items-center">
@@ -133,7 +133,7 @@ export default function Register() {
                               <form class="form" onSubmit={handleSubmit}>
                                   <div class="row" style={{marginBottom: '-15px'}}>
                                       <div class="col-12">
-                                          <div class="form-group position-relative">
+                                          <div class="form-group position-fixed">
                                               <span class="zmdi zmdi-account"></span>
                                               <input type="text" class="form-control" name='username' placeholder="username" onChange={handleChange} required/>
                                           </div>

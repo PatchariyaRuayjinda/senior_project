@@ -1,0 +1,61 @@
+แยกตาราง ใหม่เป็น หน่วยนับ
+แอดมินมีแค่จัดการ user
+
+
+product_id หรือ shelf_id เอาไว้ตารางไหน
+
+เพิ่มตาราง type กับ ขนาด ทั้งหน้า product กับ productdetails
+
+คำถาม
+1. เรื่อง ราคาของสินค้า เปลี่ยนจากจำนวน เป็นลังด้วยไหม ในหน้า ProductCreate
+2. Manager สามารถทำอะไรได้มั้ง หล้งจากมี แอดมินเพิ่ม
+
+user{
+    username: "",
+    password: "",
+    firstname: "",
+    surname:"",
+    email:"",
+    position:"",
+    department:"",
+    role:"",
+    createdAt:"",
+    updatedAt:""
+}
+
+shelves{
+    shelfNumber:"",
+    floorNumber:"",
+    lockNumber:"",
+    shelfStatus:"",
+    zone:""
+}
+
+products{
+    productName:"",
+    quantity:"",
+    productStatus:"",
+    price:"",
+    group:"",
+    box : "" 
+}
+
+productdetails{
+    receiveDate:"",
+    expireDate:"",
+    receiveQuantity:"",
+    product_id:""
+}
+
+disbursements{
+    user_id:"",
+    product_id:"",
+    quantity:"",
+    date:"",
+    state:""
+}
+
+productinshelf{
+    product_id:"",
+    shelf_id:""
+}

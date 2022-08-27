@@ -157,13 +157,13 @@ export default function DisbursementCreate() {
     return(
         <div className='container-fluid'>
             <form className='form' onSubmit={handleSubmit}>
-                <h1>Create Disbursement</h1>
+                <h1>Create Withdraw</h1>
                 <div className='container col-4'>
                     <div className='card caed-ui shadow-lg p-3 mb-4 bg-body rounded' style={{margin: "0.3rem"}}>
                         <div className='card-body fontDivCreate'>
                             <div className='text-center'>
                                 <h2 className='text-title'>
-                                    Disbursement
+                                Withdraw
                                 </h2>
                             </div>
                             <div className='marginDiv'>

@@ -35,6 +35,7 @@ import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
 import ProductDView from "./pages/mainhome/product/ProductDView";
 import WithdrawCreate from "./pages/mainhome/disbursement/WithdrawCreate";
+import Export from "./pages/mainhome/product/Export";
 
 
 function App() {
@@ -191,7 +192,7 @@ function App() {
           }
         />
         <Route
-          path="/shelfaddproduct"
+          path="/shelfaddproduct/:id"
           element={
             <UserRoute>
               <ShelfAddProduct />
@@ -238,7 +239,19 @@ function App() {
             </UserRoute>
           }
         />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/export"
+          element={
+            <UserRoute>
+              <Export />
+            </UserRoute>
+          }
+        />
+        <Route path="/register" element={
+          <AdminRoute>
+            <Register />
+          </AdminRoute>
+        } />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
       </Routes>

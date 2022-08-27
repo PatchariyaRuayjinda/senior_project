@@ -82,7 +82,8 @@ export default function ProductCreate() {
           product.productName,
           "Successful product creation",
           "success",
-          navigate("/productview")
+          navigate("/shelfaddproduct/" + _id)
+          // console.log(_id)
         );
       })
       .catch((err) => {
@@ -160,7 +161,7 @@ export default function ProductCreate() {
               <div>
                 <input className="rounded-pill border-1 form-control" type="text" name="totalQuantity" placeholder="0" value={productDetail.receiveQuantity}/>
               </div>
-              <button type="submit" className="btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3" >Submit</button>
+              <button type="submit" className="btn btn-lg btn-custom btn-dark btn-block efbutton col-4 container mt-3" > Submit</button>
             </div>
           </div>
         </div>

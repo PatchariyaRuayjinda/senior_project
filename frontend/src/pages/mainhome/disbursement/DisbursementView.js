@@ -91,9 +91,16 @@ export default function DisbursementView() {
       <Sidebar />
       <div  class='ml col-s-9 mt-5'>
         <div class='row'>
-          <h1 class='col-7 mt-3'>Disbursement View</h1>
-          <Link to='/disbursementcreate' class='btn btn-info py-0 my-4 btn-lg mx-4'>DisbursementCreate</Link>
-          <Link to='/withdrawcreate' class='btn btn-info py-0 my-4 btn-lg mx-1'>WithdrawCreate</Link>
+          <div className='col-8'>
+            <h1 class=' mt-3'>Disbursement View</h1>
+          </div>
+          <div className='col-2'>
+            <Link to='/disbursementcreate' class='btn btn-primary py-1 my-3 btn-lg'>Withdraw</Link>
+          </div>
+          <div className='col-2'>
+            <Link to='/withdrawcreate' class='btn btn-success py-1 my-3 btn-lg'>Return</Link>
+          </div>
+          
         </div>
           
           <table class='table table-bordered table-light' >

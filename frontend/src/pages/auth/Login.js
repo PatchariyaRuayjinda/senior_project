@@ -121,7 +121,7 @@ export default function Login() {
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group position-relative">
-                                                <span class="zmdi zmdi-email"></span>
+                                                <span class="zmdi zmdi-key"></span>
                                                 <input type="password" name='password' class="form-control" placeholder="Password" onChange={handleChange}/>
                                             </div>
                                         </div>

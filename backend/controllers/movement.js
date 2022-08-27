@@ -93,7 +93,6 @@ exports.outMovement = async(req, res) =>{
         productDetail[index].totalQuantity = (productDetail[index].totalQuantity / totalMovement) * 100
         // console.log(productDetail[index].totalQuantity , "จบ")
     }
-
     // lookup product name
     producName = []
     for (let i = 0; i < productDetail.length; i++) {
@@ -118,20 +117,21 @@ exports.outMovement = async(req, res) =>{
                 // console.log("...................")
                 if(scoreA >= 0 && scoreA){
                     scoreA = scoreA - productDetail[index].totalQuantity
-                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "A"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity.toFixed(2) , group: "A"})
                     // productDetail[index].totalQuantity = "A"
                     // productDetail.push("A")
                 }else if(scoreB >= 0){
                     scoreB = scoreB - productDetail[index].totalQuantity
                     // console.log(productDetail[index]._id, "B" , productDetail[index].totalQuantity)
-                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "B"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity.toFixed(2) , group: "B"})
                     // productDetail[index].totalQuantity = "B"
                 }else{
                     // console.log(productDetail[index]._id, "C" , productDetail[index].totalQuantity)
-                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity , group: "C"})
+                    productABC.push({_id: productDetail[index]._id , Name: producName[index] , movement: momenttotal[index] , totalQuantity: productDetail[index].totalQuantity.toFixed(2) , group: "C"})
                     // productDetail[index].totalQuantity = "C"
                 }
     }
+    // console.log(productABC)
     // console.log(JSON.stringify(productABC[0]._id))
     // console.log(productABC)
     // for (let index = 0; index < productDetail2.length; index++) {

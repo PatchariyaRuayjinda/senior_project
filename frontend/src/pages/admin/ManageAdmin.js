@@ -176,7 +176,7 @@ export default function ManagaAdmin() {
             <div className='col-md-2'>
                 <MenuBarAdmin />
             </div>
-            <div className='col'>
+            <div className='col mt-5'>
                 <h1>Managa Warehouse Supervisor Page</h1>
                 <table class="table">
                     <thead>
