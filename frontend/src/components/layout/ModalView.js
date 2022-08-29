@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import { findOneProduct } from '../../functions/product';
 import {Button , Modal } from 'react-bootstrap';
 export default function ModalView() {
-    const [product,setProduct] = useState([])
-    const {id} = useParams()
-    console.log(id)
-    const [show, setShow] = useState(false);
+  const [product,setProduct] = useState([])
+  const {id} = useParams()
+  console.log(id)
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

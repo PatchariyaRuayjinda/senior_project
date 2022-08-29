@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import moment from 'moment';
 import axios from 'axios';
 import Select from 'react-select';
-import { findAllProduct, withdraw, disbursement } from '../../../functions/product';
+import { findAllProduct, returns, withdraw } from '../../../functions/product';
 import { useSelector } from 'react-redux';
 import { findUserByName } from '../../../functions/users';
 import { addDisbursement } from '../../../functions/disbursement';
@@ -37,7 +37,7 @@ export default function WithdrawCreate() {
         console.log(e.label)
         checkQuantity(e.value)
     }
-
+ 
     const checkQuantity = (id) => {
         console.log(id)
         const len = product.length;
@@ -78,7 +78,7 @@ export default function WithdrawCreate() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Withdraw amount is greater than the quantity in stock.',
+                    text: 'Return amount is greater than the quantity in stock.',
                   })
             }else{
                 await axios.post(process.env.REACT_APP_API + '/addDisbursement',{
@@ -89,7 +89,7 @@ export default function WithdrawCreate() {
                     state: data.state
                 }).then(async(res) => {
                     if(data.state == true){
-                        disbursement(product_id, data.quantity)
+                        withdraw(product_id, data.quantity)
                         .then(res => {
                             console.log(res)
                             Swal.fire({
@@ -101,7 +101,7 @@ export default function WithdrawCreate() {
                             console.log(err.response)
                         })
                     }else{
-                        withdraw(product_id, data.quantity)
+                        returns(product_id, data.quantity)
                         .then(res => {
                             console.log(res)
                             Swal.fire({
