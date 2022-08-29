@@ -1,9 +1,8 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const productInShelfSchema = new mongoose.Schema(
-    {
-        product_id:{type: mongoose.ObjectId},
-        shelf_id:{type: mongoose.ObjectId}
-    }
-)
-module.exports = productinshelf = mongoose.model('productinshelf', productInShelfSchema)
+const ProductInShelfSchema = new mongoose.Schema({
+    product_id:{type: mongoose.ObjectId},
+    shelf_id:{type: mongoose.ObjectId}
+})
+
+module.exports = productInShelf = mongoose.model('productInShelf', ProductInShelfSchema)
