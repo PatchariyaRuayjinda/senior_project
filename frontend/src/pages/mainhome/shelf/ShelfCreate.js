@@ -12,7 +12,7 @@ export default function ShelfCreate() {
         shrlfNumber: "",
         floorNumber: "",
         lockNumber: "",
-        shelfStatus: "",
+        // shelfStatus: "",
         zone: ""
       })
     
@@ -79,11 +79,10 @@ export default function ShelfCreate() {
                             <div>
                                 <input className='rounded-pill border-1 form-control' type='text' name='lockNumber' placeholder='Please enter the lock number.' onChange={handleChange} required />
                             </div>
-                            <div className='marginDiv'>
+                            {/* <div className='marginDiv'>
                                 <span> ShelfStatus </span>
                             </div>
                             <div>
-                                {/* <input className='rounded-pill border-1 form-control' type='text' name='shelfStatus' placeholder='Please enter Statusshelf.' onChange={handleChange} required /> */}
                                 <Select
                                 style={{width: '100%'}}
                                 placeholder="Please select shelf status"
@@ -98,7 +97,7 @@ export default function ShelfCreate() {
                                         </Select.Option>
                                     ))}
                                 </Select>
-                            </div>
+                            </div> */}
                             <div className='marginDiv'>
                                 <span> Zone </span>
                             </div>

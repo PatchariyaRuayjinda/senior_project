@@ -5,7 +5,7 @@ const ShelfSchema = new mongoose.Schema(
         shelfNumber:{type: Number},
         floorNumber:{type: Number},
         lockNumber:{type: Number},
-        shelfStatus:{type: Boolean},
+        // shelfStatus:{type: Boolean},
         zone:{type: String}
     }
 )

@@ -131,10 +131,10 @@ exports.addProduct = async(req, res) => {
 exports.updateProduct = async(req, res) => {
     try{
         console.log('updateproduct',req.body)
-        const {_id, productName, quantity, price, group } = req.body;
+        const {_id, productName, productStatus, price, group } = req.body;
         var newProudct = {
             productName,
-            quantity,
+            productStatus,
             price,
             group
         }
@@ -160,7 +160,7 @@ exports.deleteProduct = async(req, res) => {
     }
 }
 
-exports.disbursement = async(req, res) => {
+exports.withdraw = async(req, res) => {
     try { 
         const {id, quantity} = req.body
         const total = await Product.findOne({_id: id})
@@ -178,7 +178,7 @@ exports.disbursement = async(req, res) => {
     }
 }
 
-exports.withdraw = async(req, res) => {
+exports.returns = async(req, res) => {
     try{
         const {id, quantity} = req.body
         const total = await Product.findOne({_id: id})

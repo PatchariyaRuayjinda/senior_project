@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './style.css'
 import { addProductDetail } from '../../../functions/productdetail'
-import { findAllProduct, withdraw } from '../../../functions/product';
+import { findAllProduct, returns } from '../../../functions/product';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
@@ -46,7 +46,7 @@ export default function ProductDetailCreate() {
                 receiveQuantity: value.receiveQuantity,
                 product_id: product_id
             }).then(async(res) => {
-                await withdraw(product_id, value.receiveQuantity)
+                await returns(product_id, value.receiveQuantity)
                 .then(res => {
                     Swal.fire(
                         product.label,

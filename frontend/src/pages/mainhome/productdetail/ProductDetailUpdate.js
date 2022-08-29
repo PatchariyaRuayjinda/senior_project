@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import { findOneProductDetail, updateProductDetail } from '../../../functions/productdetail';
-import { withdraw, disbursement } from '../../../functions/product';
+import { returns, withdraw } from '../../../functions/product';
 import Swal from 'sweetalert2';
 
 export default function ProductDetailUpdate() {
@@ -43,8 +43,8 @@ export default function ProductDetailUpdate() {
         .then(async(res) => {
             if(defaultQuantity > productDetail.receiveQuantity){
                 const quantity = defaultQuantity - productDetail.receiveQuantity
-                console.log('disbursement', quantity)
-                disbursement(productDetail.product_id, quantity)
+                console.log('withdraw', quantity)
+                withdraw(productDetail.product_id, quantity)
                 .then(res => {
                     navigate('/productdetailview')
                 }).catch(err => {
@@ -52,8 +52,8 @@ export default function ProductDetailUpdate() {
                 })
             }else if(defaultQuantity < productDetail.receiveQuantity){
                 const quantity = productDetail.receiveQuantity - defaultQuantity 
-                console.log('withdraw', quantity)
-                withdraw(productDetail.product_id, quantity)
+                console.log('returns', quantity)
+                returns(productDetail.product_id, quantity)
                 .then(res => {
                     navigate('/productdetailview')
                 }).catch(err => {

@@ -4,7 +4,7 @@ import { findAllDisbursement, deleteDisbursement } from '../../../functions/disb
 import Sidebar from '../../../components/layout/Sidebar'
 import { Link } from 'react-router-dom'
 import moment from 'moment/min/moment-with-locales'
-import { withdraw, disbursement } from '../../../functions/product'
+import { returns, withdraw } from '../../../functions/product'
 
 export default function DisbursementView() {
   const [disbursements,setDisbursement] = useState([])
@@ -46,14 +46,14 @@ export default function DisbursementView() {
   const deleteQuantityOnProduct = (productID, quantity, state) => {
     console.log(state)
     if(state === true){
-      withdraw(productID, quantity)
+      returns(productID, quantity)
       .then(res => {
         console.log(res)
       }).catch(err => {
         console.log(err)
       })
     }else{
-      disbursement(productID, quantity)
+      withdraw(productID, quantity)
       .then(res => {
         console.log(res)
       }).catch(err => {
@@ -78,7 +78,7 @@ export default function DisbursementView() {
     .then(res => {
       setDisbursement(res.data)
       // console.log(res.data[0].product[0])
-      // console.log(res.data)
+      console.log(res.data)
       })
       .catch(err=>{
         console.log(err)
@@ -107,7 +107,7 @@ export default function DisbursementView() {
             <thead>
               <tr>
                 <th scope='col'>#</th>
-                <th scope='col'>Username</th>
+                <th scope='col'>Name</th>
                 <th scope='col'>Product Name</th>
                 <th scope='col'>Quantity</th>
                 <th scope='col'>Date</th>
@@ -121,7 +121,7 @@ export default function DisbursementView() {
                 <td scope="row">{index +1}</td>
                 {/* <td>{product.user_id}</td> */}
                 {item.user.map((users) => (
-                  <td>{users.username}</td>
+                  <td>{users.firstname}</td>
                 ))} 
                 {/* <td>{product.product_id}</td> */}
                 {/* <td>{product.product[0].productName}</td> */}

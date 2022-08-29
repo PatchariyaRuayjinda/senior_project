@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { findOneDisbursement, updateDisbursement } from '../../../functions/disbursement'
-import { findAllProduct, findOneProduct, withdraw, disbursement } from '../../../functions/product'
+import { findAllProduct, findOneProduct, returns, withdraw } from '../../../functions/product'
 import Select from 'react-select'
 import Swal from 'sweetalert2';
 // import axios from 'axios'
@@ -89,8 +89,8 @@ export default function DisbursementUpdate() {
             if(data.state === defaultState){
                 if(defaultQuantity > data.quantity){
                     const quantity = defaultQuantity - data.quantity
-                    console.log('disbursement', quantity)
-                    disbursement(data.product_id, quantity)
+                    console.log('withdraw', quantity)
+                    withdraw(data.product_id, quantity)
                     .then(res => {
                         console.log(res.data)
                     }).catch(err => {
@@ -98,8 +98,8 @@ export default function DisbursementUpdate() {
                     })
                 }else if(defaultQuantity < data.quantity){
                     const quantity = data.quantity - defaultQuantity
-                    console.log('withdraw', quantity)
-                    withdraw(data.product_id, quantity)
+                    console.log('returns', quantity)
+                    returns(data.product_id, quantity)
                     .then(res => {
                         console.log(res.data)
                     }).catch(err => {
@@ -109,17 +109,17 @@ export default function DisbursementUpdate() {
             }else{
                 if(data.state == true){
                     const quantity = defaultQuantity + data.quantity
-                    disbursement(data.product_id, quantity)
+                    withdraw(data.product_id, quantity)
                     .then(res => {
-                        console.log('สลับ disbursement',res.data)
+                        console.log('สลับ withdraw',res.data)
                     }).catch(err => {
                         console.log(err.response)
                     })
                 }else{
                     const quantity = defaultQuantity + data.quantity
-                    withdraw(data.product_id, quantity)
+                    returns(data.product_id, quantity)
                     .then(res =>{
-                        console.log('สลับ withdraw',res.data)
+                        console.log('สลับ returns',res.data)
                     }).catch(err => {
                         console.log(err.response)
                     })
@@ -127,7 +127,7 @@ export default function DisbursementUpdate() {
             }
             Swal.fire({
                 icon:"success",
-                title: "Disbursement update Successful",
+                title: "Withdraw update Successful",
                 showConfirmButton: false,
                 timer: 1200
             });

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import moment from 'moment';
 import axios from 'axios';
 import Select from 'react-select';
-import { findAllProduct, withdraw, disbursement } from '../../../functions/product';
+import { findAllProduct, withdraw, returns } from '../../../functions/product';
 import { useSelector } from 'react-redux';
 import { findUserByName } from '../../../functions/users';
 import { addDisbursement } from '../../../functions/disbursement';
@@ -90,7 +90,7 @@ export default function DisbursementCreate() {
                     state: data.state
                 }).then(async(res) => {
                     if(data.state == true){
-                        disbursement(product_id, data.quantity)
+                        withdraw(product_id, data.quantity)
                         .then(res => {
                             console.log(res)
                             Swal.fire({
@@ -102,7 +102,7 @@ export default function DisbursementCreate() {
                             console.log(err.response)
                         })
                     }else{
-                        withdraw(product_id, data.quantity)
+                        returns(product_id, data.quantity)
                         .then(res => {
                             console.log(res)
                             Swal.fire({
