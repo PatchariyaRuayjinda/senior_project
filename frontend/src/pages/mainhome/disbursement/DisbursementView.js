@@ -4,7 +4,7 @@ import { findAllDisbursement, deleteDisbursement } from '../../../functions/disb
 import Sidebar from '../../../components/layout/Sidebar'
 import { Link } from 'react-router-dom'
 import moment from 'moment/min/moment-with-locales'
-import { withdraw, disbursement } from '../../../functions/product'
+import { returns, withdraw } from '../../../functions/product'
 
 export default function DisbursementView() {
   const [disbursements,setDisbursement] = useState([])
@@ -46,14 +46,14 @@ export default function DisbursementView() {
   const deleteQuantityOnProduct = (productID, quantity, state) => {
     console.log(state)
     if(state === true){
-      withdraw(productID, quantity)
+      returns(productID, quantity)
       .then(res => {
         console.log(res)
       }).catch(err => {
         console.log(err)
       })
     }else{
-      disbursement(productID, quantity)
+      withdraw(productID, quantity)
       .then(res => {
         console.log(res)
       }).catch(err => {
@@ -78,7 +78,7 @@ export default function DisbursementView() {
     .then(res => {
       setDisbursement(res.data)
       // console.log(res.data[0].product[0])
-      // console.log(res.data)
+      console.log(res.data)
       })
       .catch(err=>{
         console.log(err)

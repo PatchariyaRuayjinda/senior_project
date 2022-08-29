@@ -20,15 +20,15 @@ export const findOneProduct = async(id) =>{
     return await axios.get(process.env.REACT_APP_API + '/findOneProduct/' + id)
 }
 
-export const withdraw = async(id, quantity) => {
-    return await axios.patch(process.env.REACT_APP_API + '/withdraw', {
+export const returns = async(id, quantity) => {
+    return await axios.patch(process.env.REACT_APP_API + '/returns', {
         id: id,
         quantity: quantity
     })
 }
 
-export const disbursement = async(id, quantity) => {
-    return await axios.patch(process.env.REACT_APP_API + '/disbursement', {
+export const withdraw = async(id, quantity) => {
+    return await axios.patch(process.env.REACT_APP_API + '/withdraw', {
         id: id,
         quantity: quantity
     })

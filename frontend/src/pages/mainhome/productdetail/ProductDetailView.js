@@ -4,7 +4,7 @@ import {findAllProductDetail, deleteProductDetail} from '../../../functions/prod
 import Sidebar from '../../../components/layout/Sidebar'
 import { Link } from 'react-router-dom'
 import moment from 'moment/min/moment-with-locales'
-import { disbursement } from '../../../functions/product'
+import { withdraw } from '../../../functions/product'
 
 export default function ProductDetailView() {
   const [productDetail, setProductDetail] = useState([])
@@ -29,7 +29,7 @@ export default function ProductDetailView() {
                   'Product Detail has been deleted.',
                   'success'
               )
-              disbursement(productID, receiveQuantity)
+              withdraw(productID, receiveQuantity)
               .then(res => {
                 console.log(res.data)
               }).catch(err => {
@@ -65,7 +65,7 @@ export default function ProductDetailView() {
     findAllProductDetail()
     .then(response => {
       setProductDetail(response.data)
-      // console.log(response.data)
+      console.log(response.data)
       })
       .catch(err=>{
         console.log(err.response)
@@ -108,9 +108,13 @@ export default function ProductDetailView() {
                   {moment(productDetail.receiveDate).locale('th').format('ll')}
                 </td>
                 {/* <th>{product.expireDate}</th> */}
-                <td>
+                {/* <td>
                   {moment(productDetail.expireDate).locale('th').format('ll')}
-                </td>
+                </td> */}
+                {productDetail.expireDate != null
+                ? <td>{moment(productDetail.expireDate).locale('th').format('ll')}</td>
+                : <td>N/A</td>
+                }
                 <td>{productDetail.receiveQuantity}</td>
                 <td>
                 <Link to={'/productdetailupdate/' + productDetail._id } className='btn btn-outline-warning btn-sm mx-1'>
