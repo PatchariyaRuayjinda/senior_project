@@ -177,8 +177,7 @@ export default function Register() {
                                       </div>
                                       <div class="col-12" >
                                           <div class="form-group position-relative">
-                                              {/* <span class="zmdi zmdi-email"></span>
-                                              <input type="text" name='department' class="form-control" placeholder="department" onChange={handleChange} required/> */}
+  
                                               <Select options={departmentOption} onChange={handleChangeDepartment} placeholder='Select Department...'/>
                                           </div>
                                       </div>
