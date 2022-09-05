@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Switch, Select, Tag, Modal } from 'antd';
+import { Switch, Select, Tag, Modal, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import MenuBarAdmin from '../../components/layout/MenuBarAdmin'
 import { useSelector } from 'react-redux';
@@ -176,8 +176,17 @@ export default function ManagaAdmin() {
             <div className='col-md-2'>
                 <MenuBarAdmin />
             </div>
-            <div className='col mt-5'>
+            <div className='col-10 mt-5'>
+                <div className='row'>
+
                 <h1>Managa Warehouse Supervisor Page</h1>
+                <text style={{paddingLeft: '200px'}}></text>
+                <a href='/register' className='mt-3 absbtn btn-primary py-0 my-4 btn-lg'>New User </a>
+
+                </div>
+                
+                {/* <Button type='primary'>New User</Button> */}
+                
                 <table class="table">
                     <thead>
                         <tr>

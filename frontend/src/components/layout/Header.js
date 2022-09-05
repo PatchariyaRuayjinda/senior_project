@@ -74,13 +74,7 @@ export default function Header() {
                 >
                         <Menu.Item key="setting:1" icon={<ProfileOutlined />}>Profile</Menu.Item>
                         <Menu.Item key="setting:2" icon={<LogoutOutlined />} onClick={logout}>logout</Menu.Item>
-                        {user.position === 'Manager' && <>
-                            <Menu.Item key="setting:3" icon={<UserAddOutlined />}>
-                                <Link to="/Register">Register</Link>
-                            </Menu.Item>
-                        </>
-                            
-                        }
+                       
                         
                     {/* <Menu.ItemGroup title="Item-2">
                         <Menu.Item key="setting:3">Option3</Menu.Item>

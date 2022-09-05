@@ -64,7 +64,7 @@ export default function Register() {
         // alert(res.data)
       }).catch(err => {
         Swal.fire('แจ้งเตือน',
-        err.response,
+        err.response.data,
         'error')
         console.log(err.response.data)
         // alert(err.response.data)
@@ -131,9 +131,9 @@ export default function Register() {
                           <div class="form-wrap bg-white" >
                               <h4 class="btm-sep pb-3 mb-5">Register Page</h4>
                               <form class="form" onSubmit={handleSubmit}>
-                                  <div class="row" style={{marginBottom: '-15px'}}>
+                                  <div class="row">
                                       <div class="col-12">
-                                          <div class="form-group position-fixed">
+                                          <div class="form-group position-relative">
                                               <span class="zmdi zmdi-account"></span>
                                               <input type="text" class="form-control" name='username' placeholder="username" onChange={handleChange} required/>
                                           </div>
