@@ -1,13 +1,16 @@
 import React from "react";
 import { useEffect, useState, useCallback } from "react";
-import { outMovement } from "../../../functions/movement";
+import { findAllProductInShelf } from "../../../functions/productInShelf";
 import Sidebar from "../../../components/layout/Sidebar";
+import {useReactToPrint} from "react-to-print"
 
 export default function Export() {
     const [movement, setMovement] = useState([]);
-
+    const handlePrint = useReactToPrint({
+      content: () => findAllProductInShelf.current,
+    })
     useEffect(() => {
-        outMovement()
+        findAllProductInShelf()
           .then((response) => {
             setMovement(response.data);
           })
@@ -22,6 +25,8 @@ export default function Export() {
             <div class="ml col-s-9 mt-5">
                 <div class="row">
                     <h1 className="col-8 text-light">Export</h1>
+                    <componentToPrint ref={findAllProductInShelf} />
+                    <button className="btn btn-info" onClick={handlePrint}> print this out </button>
                 </div>
                 <table class="table table-bordered table-light">
             <thead>
@@ -41,6 +46,9 @@ export default function Export() {
                 <th scope="col">{movement.movement}</th>
                 <th scope="col">{movement.totalQuantity}</th>
                 <th scope="col">{movement.group}</th>
+                <th scope="col">{movement.shelfNumber}</th>
+                <th scope="col">{movement.floorNumber}</th>
+                <th scope="col">{movement.lockNumber}</th>
               </tbody>
             ))}
           </table> 
