@@ -1,6 +1,7 @@
 const ProductInShelf = require('../models/productInShelf')
 const ProductDetail = require('../models/productDetail')
 const Disbursement = require('../models/disbursement')
+const Shelf = require('../models/shelf')
 
 exports.findAllProductInShelf = async(req, res)=>{
     try{
@@ -191,6 +192,35 @@ exports.addInShelf = async(req, res) => {
         })
         await payload.save()
         res.send('add Product Shelf Success!')
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
+
+exports.findShelfByZone = async(req, res) => {
+    try{
+        console.log('ss')
+        const {zone} = req.params
+        const shelf = await Shelf.find({"zone": zone})
+        res.send(shelf)
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
+
+exports.updateShelf = async(req, res) => {
+    try{
+        const { _id, shelf_id} = req.body
+        var newProductInShelf = {
+            shelf_id
+        }
+        await ProductInShelf.updateOne(
+            {_id: _id},
+            {$set: newProductInShelf}
+        )
+        res.send('Update Shelf in Product Success!')
     }catch(err){
         console.log(err)
         res.status(500).send('Server Error!')

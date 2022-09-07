@@ -24,6 +24,7 @@ import ShelfCreate from "./pages/mainhome/shelf/ShelfCreate";
 import ShelfUpdate from "./pages/mainhome/shelf/ShelfUpdate";
 import InMovement from "./pages/mainhome/product/InMovement";
 import ShelfAddProduct from "./pages/mainhome/shelf/ShelfAddProduct";
+import UpdateGroup from "./pages/mainhome/product/UpdateGroup";
 // Layout
 import Header from "./components/layout/Header";
 // functions
@@ -247,6 +248,11 @@ function App() {
             </UserRoute>
           }
         />
+        <Route path='/updateGroup/:id/:group' element={
+          <UserRoute>
+            <UpdateGroup />
+          </UserRoute>
+        } />
         <Route path="/register" element={
           <AdminRoute>
             <Register />
