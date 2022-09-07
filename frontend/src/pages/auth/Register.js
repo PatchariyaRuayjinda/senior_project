@@ -122,14 +122,14 @@ export default function Register() {
     //     <button disabled={value.password.length < 4}>Submit</button>
     //   </form>
     // </div>
-    <div class="align body">
-      <div class="row" style={{marginTop: "60px"}}>
+    <div class="align body" style={{position: "fixed"}}>
+      <div class="row" style={{marginTop: "65px" , marginLeft: "450px"}}>
           <div class="col-md-11 mt-60 mx-md-auto">
-              <div class="login-box bg-white pl-0">
+              <div class="login-box">
                   <div class="row no-gutters align-items-center">
                       <div class="col-md-6">
-                          <div class="form-wrap bg-white" >
-                              <h4 class="btm-sep pb-3 mb-5">Register Page</h4>
+                          <div class="form-wrap bg-white">
+                              <h4 class="btm-sep pb-3 mb-3">Register Page</h4>
                               <form class="form" onSubmit={handleSubmit}>
                                   <div class="row">
                                       <div class="col-12">
@@ -188,7 +188,7 @@ export default function Register() {
                               </form>
                           </div>
                       </div>
-                      <div class="col-md-6" style={{marginTop: '3.5rem'}}>
+                      {/* <div class="col-md-6" style={{marginTop: '3.5rem'}}>
                           <div class="content text-center">
                               <div class="border-bottom pb-5 mb-5">
                                   <h3 class="c-black">Have your account?</h3>
@@ -199,7 +199,7 @@ export default function Register() {
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> */}
                   </div>
               </div>
           </div>

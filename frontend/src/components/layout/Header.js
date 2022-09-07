@@ -72,7 +72,13 @@ export default function Header() {
                     icon={<UserOutlined />}
                     title={user.username}
                 >
-                        <Menu.Item key="setting:1" icon={<ProfileOutlined />}>Profile</Menu.Item>
+                        {user.position === 'Admin' && <>
+                            <Menu.Item key="setting:1" icon={<ProfileOutlined />}>
+                            <Link to='/register'>create account</Link>
+                            </Menu.Item>
+                            </>
+                    }
+                        
                         <Menu.Item key="setting:2" icon={<LogoutOutlined />} onClick={logout}>logout</Menu.Item>
                        
                         

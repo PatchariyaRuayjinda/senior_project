@@ -103,7 +103,7 @@ export default function Login() {
     <div class="align col-12">
         <div class="row">
             <div class="col-md-11 mt-60 mx-md-auto">
-                <div class="login-box bg-white pl-0">
+                <div class="login-box" style={{marginLeft: "300px"}}>
                     <form class="form" onSubmit={handleSubmit}>
                         <div class="row no-gutters align-items-center">
                             <div class="col-md-6">
