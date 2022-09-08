@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { outMovement , addGroupABC } from "../../../functions/movement";
 import Sidebar from "../../../components/layout/Sidebar";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 // import { Link } from 'react-router-dom'
 // import moment from 'moment'
 
@@ -26,6 +27,10 @@ export default function InMovement() {
       // console.log("first")
       addGroupABC(movement[i]._id , movement[i].group)
       .then(res => {
+        Swal.fire({
+          icon: "success",
+          title: "Product group success"
+        })
         console.log(res)
       }).catch(err =>{
         console.log(err.response)
