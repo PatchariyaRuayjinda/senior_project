@@ -34,7 +34,7 @@ export default function Login() {
         //   }else {
         //     navigate('/user/index')
         //   }
-        if(position === 'Manager'){
+        if(position === 'Admin'){
             navigate('/admin/index')
         }else {
             navigate('/user/index')
@@ -81,7 +81,7 @@ export default function Login() {
                 console.log(err)
                 Swal.fire({
                     icon: 'error',
-                    title: err.response.data,
+                    title: err.response,
                     text: 'Please, Try again.'
                   })
           });
@@ -103,7 +103,7 @@ export default function Login() {
     <div class="align col-12">
         <div class="row">
             <div class="col-md-11 mt-60 mx-md-auto">
-                <div class="login-box bg-white pl-0">
+                <div class="login-box" style={{marginLeft: "300px"}}>
                     <form class="form" onSubmit={handleSubmit}>
                         <div class="row no-gutters align-items-center">
                             <div class="col-md-6">
@@ -131,7 +131,7 @@ export default function Login() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {/* <div class="col-md-6">
                                 <div class="content text-center">
                                     <div class="border-bottom pb-5 mb-5">
                                         <h3 class="c-black">First time here?</h3>
@@ -142,7 +142,7 @@ export default function Login() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                      </form>
                 </div>
