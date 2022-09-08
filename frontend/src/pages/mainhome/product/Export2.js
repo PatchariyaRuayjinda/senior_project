@@ -34,9 +34,25 @@ const styles = StyleSheet.create({
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1
+    flexGrow: 1,
   }
 });
+const textstyles = StyleSheet.create({
+  textNumber: {
+    textAlign: 'right',
+    paddingRight: 2,
+    // position: 'absolute'
+    // marginRight: '10px',
+    // position: 'fixed'
+  },
+  textHead: {
+    textAlign: 'center',
+  },
+  textstring: {
+    textAlign: 'left',
+    paddingLeft: 2
+  }
+})
 
 export default function Export2() {
     const [movement, setMovement] = useState(null);
@@ -72,24 +88,22 @@ export default function Export2() {
                                 {/* <Text>Test</Text> */}
                                 <Table>
                                   <TableHeader>
-                                    <TableCell>ProductName</TableCell>
-                                    <TableCell>Movement</TableCell>
-                                    <TableCell>%</TableCell>
-                                    <TableCell>Group</TableCell>
-                                    <TableCell>Shelf</TableCell>
-                                    <TableCell>Floor</TableCell>
-                                    <TableCell>Lock</TableCell>
+                                    <TableCell style={textstyles.textHead}>ProductName</TableCell>
+                                    <TableCell style={textstyles.textHead}>Movement</TableCell>
+                                    <TableCell style={textstyles.textHead}>%</TableCell>
+                                    <TableCell style={textstyles.textHead}>Group</TableCell>
+                                    <TableCell style={textstyles.textHead}>Shelf</TableCell>
+                                    <TableCell style={textstyles.textHead}>Floor</TableCell>
+                                    <TableCell style={textstyles.textHead}>Lock</TableCell>
                                   </TableHeader>
-                                </Table>
-                                <Table data={movement}>
-                                  <TableBody>
-                                    <DataTableCell getContent={x => x.Name} />
-                                    <DataTableCell getContent={x => x.movement} />
-                                    <DataTableCell getContent={x => x.totalQuantity} />
-                                    <DataTableCell getContent={x => x.group} />
-                                    <DataTableCell getContent={x => x.shelfNumber} />
-                                    <DataTableCell getContent={x => x.floorNumber} />
-                                    <DataTableCell getContent={x => x.lockNumber} />
+                                  <TableBody data={movement} style={styles.positionTable}>
+                                    <DataTableCell style={textstyles.textstring} getContent={x => x.Name} />
+                                    <DataTableCell style={textstyles.textNumber} getContent={x => x.movement} />
+                                    <DataTableCell style={textstyles.textNumber} getContent={x => x.totalQuantity} />
+                                    <DataTableCell style={textstyles.textstring} getContent={x => x.group} />
+                                    <DataTableCell style={textstyles.textNumber} getContent={x => x.shelfNumber} />
+                                    <DataTableCell style={textstyles.textNumber} getContent={x => x.floorNumber} />
+                                    <DataTableCell style={textstyles.textNumber} getContent={x => x.lockNumber} />
                                   </TableBody>
                                 </Table>
                               </View>
@@ -118,13 +132,13 @@ export default function Export2() {
             </thead>
             {movement.map((movement) => (
               <tbody>
-                <th scope="col">{movement.Name}</th>
-                <th scope="col">{movement.movement}</th>
-                <th scope="col">{movement.totalQuantity}</th>
-                <th scope="col">{movement.group}</th>
-                <th scope="col">{movement.shelfNumber}</th>
-                <th scope="col">{movement.floorNumber}</th>
-                <th scope="col">{movement.lockNumber}</th>
+                <td scope="row">{movement.Name}</td>
+                <td>{movement.movement}</td>
+                <td>{movement.totalQuantity}</td>
+                <td>{movement.group}</td>
+                <td>{movement.shelfNumber}</td>
+                <td>{movement.floorNumber}</td>
+                <td>{movement.lockNumber}</td>
                 <Link to={'/updateGroup/' + movement._id + '/' + movement.group } className='btn btn-outline-warning btn-sm mx-1'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
