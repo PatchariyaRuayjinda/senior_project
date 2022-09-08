@@ -36,7 +36,7 @@ export default function ShelfAddProduct() {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Please Select product',
+                text: 'Please Select other shelf',
               })
         }else{
             console.log(shelf_id)
@@ -52,7 +52,7 @@ export default function ShelfAddProduct() {
                 // await withdraw(product_id, value.receiveQuantity)
                 // .then(res => {
                     Swal.fire(
-                        'Successful product detail creation',
+                        'Successful Add Shelf',
                         'success',
                         // navigate('/productdetailview')    
                     )
@@ -97,7 +97,7 @@ export default function ShelfAddProduct() {
             }))
             setLockNumber(shelfOption3)
         }).catch(err => {
-            console.log(err.response)
+            console.log(err.response.data)
         })
     }, [])
 
