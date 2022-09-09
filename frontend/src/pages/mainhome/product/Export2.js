@@ -112,7 +112,7 @@ export default function Export2() {
                         </Document>
                       }
                       fileName='newShelf.pdf'
-                      className='btn btn-primary m-1'
+                      className='btn btn-primary m-1 my-3'
                     >
                       PDF Download
                     </PDFDownloadLink>
