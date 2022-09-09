@@ -53,7 +53,9 @@ function App() {
           payload: {
             token: idtoken,
             username: res.data.username,
-            role: res.data.role,
+            position: res.data.position,
+            firstname: res.data.firstname
+            // role: res.data.role,
           },
         });
       })

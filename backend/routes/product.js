@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller
-const { findAllProduct, addProduct, updateProduct, deleteProduct, withdraw, returns, findOneProduct } = require('../controllers/product')
+const { findAllProduct, addProduct, updateProduct, deleteProduct, withdraw, returns, findOneProduct, findOneProduct2 } = require('../controllers/product')
 
 //@Endpoint http://localhost:3001/api/findAllproduct
 //@method GET
@@ -13,6 +13,11 @@ router.get('/findAllProduct', findAllProduct)
 //@method GET
 //@Access Publish
 router.get('/findOneProduct/:id', findOneProduct)
+
+//@Endpoint http://localhost:3001/api/findOneProduct2
+//@method GET
+//@Access Publish
+router.get('/findOneProduct2/:id', findOneProduct2)
 
 //@Endpoint http://localhost:3001/api/addProduct
 //@method POST

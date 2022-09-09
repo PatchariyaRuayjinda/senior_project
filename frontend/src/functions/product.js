@@ -33,3 +33,7 @@ export const withdraw = async(id, quantity) => {
         quantity: quantity
     })
 }
+
+export const findOneProduct2 = async(id) => {
+    return await axios.get(process.env.REACT_APP_API + '/findOneProduct2/' + id)
+}

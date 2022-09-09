@@ -163,10 +163,10 @@ export default function WithdrawCreate() {
                                 <h2 className='card-title'>Return</h2>
                             </div>
                             <div className='marginDiv'>
-                                <span> Username </span>
+                                <span> Firstname </span>
                             </div>
                             <div>
-                                <input className='rounded-pill border-1 form-control' type='text' name='price' value={user.username} placeholder='Please enter the username.' required/>
+                                <input className='rounded-pill border-1 form-control' type='text' name='price' value={user.firstname} placeholder='Please enter the firstname.' required/>
                             </div>
                             {/* <Select options={username} onChange={handleChangeUsername} /> */}
                             <div className='marginDiv'>

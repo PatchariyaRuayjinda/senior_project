@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
-import {findAllProduct, findOneProduct} from '../../../functions/product'
+import {findAllProduct, findOneProduct, findOneProduct2} from '../../../functions/product'
 import Sidebar from '../../../components/layout/Sidebar'
 import { Link,useParams } from 'react-router-dom'
 import './style.css'
@@ -9,6 +9,7 @@ import ModalView from '../../../components/layout/ModalView'
 
 export default function ProductView() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [productModal, setProductModal] = useState([])
   const [products,setProduct] = useState([])
   const [product,setProducts] = useState({
     _id: "",
@@ -23,12 +24,12 @@ export default function ProductView() {
     id: '',
 })
 
-  const showModal = (_id) => {
-    setIsModalVisible(true);
-    setValue({...value,
-        id: _id,
-    })
-    loadData(_id)
+const showModal = async(_id) => {
+  setIsModalVisible(true);
+  // setValue({...value,
+  //     id: _id,
+  // })
+  await loadData(_id)
 };
 
 const handleCancel = () => {
@@ -75,13 +76,16 @@ const handleCancel = () => {
   //     })
   //  }
   // }
-  const loadData = (_id) =>{
-    findOneProduct(_id)
-    .then(response => {
-      setProducts(response.data)
+  const loadData = async(_id) =>{
+    await findOneProduct2(_id)
+    .then(res => {
+      // console.log(res.data)
+      setProducts(res.data)
+      // console.log(res.data.product.productName)
+      setProductModal(res.data.product)
       })
       .catch(err=>{
-        console.log(err.prsponse.data)
+        console.log(err.response)
       });
   }
 
@@ -152,9 +156,21 @@ const handleCancel = () => {
             </tbody>
             ))}
           </table>
-          <Modal title={product.productName} visible={isModalVisible} onCancel={handleCancel}>
-            <p style={{marginBottom: '-1px'}}>{product.quantity}</p>
-          </Modal>
+          <Modal title={productModal.productName} visible={isModalVisible} onCancel={handleCancel}>
+
+          {/* <p style={{marginBottom: '-1px'}}>productName: {productModal.productName}</p> */} 
+          <p style={{marginBottom: '-1px'}}>Bath per unit: {productModal.price}</p>
+          <p style={{marginBottom: '-1px'}}>ProductStatus: {productModal.productStatus}</p>
+          <p style={{marginBottom: '-1px'}}>Group: {productModal.group}</p>
+          <p style={{marginBottom: '-1px'}}>withdrawCount: {product.withdrawCount}</p>
+          <p style={{marginBottom: '-1px'}}>returnCount: {product.returnCount}</p>
+          {/* {product.shelf.map((item) => {
+            <div className='row'>
+              <p style={{marginBottom: '-1px'}}>{item.shelfNumber}</p>
+
+            </div>
+          })} */}
+        </Modal>
       </div>
       </div>
       </div>

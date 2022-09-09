@@ -1,7 +1,9 @@
 const Product = require('../models/product')
 const ProductDetail = require('../models/productDetail')
 const Disbursement = require('../models/disbursement')
-var mongoose = require('mongoose');
+const ProductInShelf = require('../models/productInShelf')
+var mongo = require('mongodb');
+// var mongoose = require('mongoose');
 
 exports.findAllProduct = async(req, res, next) => {
     try{
@@ -23,7 +25,41 @@ exports.findOneProduct = async(req, res, next) => {
         res.status(500).send('Server Error!')
     }
 }
-
+exports.findOneProduct2 = async(req, res, next) => {
+    try{
+        const {id} = req.params
+        const withdrawCount = await Disbursement.find({product_id: id, state: true}).count()
+        const returnCount = await Disbursement.find({product_id: id, state: false}).count()
+        const product = await Product.find({_id: id})
+        // const productInShelf = await ProductInShelf.aggregate([
+        //     {"$match": {product_id: new mongo.ObjectID(id)}},
+        //     {$lookup: {
+        //         from: "shelves",
+        //         localField: "shelf_id",
+        //         foreignField: "_id",
+        //         as: "shelf"
+        //     }},
+        //     {$project: {
+        //         "shelf.shelfNumber": 1,
+        //         "shelf.floorNumber": 1,
+        //         "shelf.lockNumber": 1,
+        //         "shelf._id": 1,
+        //         "_id": 0
+        //     }}
+        // ])
+        var value = {
+            product: product[0],
+            withdrawCount: withdrawCount,
+            returnCount: returnCount,
+            // shelf: productInShelf
+        }
+        // console.log('value', value)
+        res.send(value)
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
 exports.addProduct = async(req, res) => {
     try{
         const disbursementPlus = await Disbursement.aggregate([
