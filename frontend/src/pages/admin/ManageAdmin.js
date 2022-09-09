@@ -93,7 +93,7 @@ export default function ManagaAdmin() {
 
     const roleData = ['admin', 'user']
     // const positionData = ['Warehouse Supervisor', 'Warehouse Staff']
-    const positionData = ['Manager', 'Warehouse Staff']
+    const positionData = ['Manager', 'Warehouse Staff','Admin']
 
     // const handleChangeRole = (e, _id) => {
     //     const value = {

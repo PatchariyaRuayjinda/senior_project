@@ -11,7 +11,7 @@ const LoadingToRedirect = () => {
             setCount((currentCount)=> --currentCount)
         },1000)
         // Redirect
-        count === 0 && navigate('/')
+        count === 0 && navigate('/user/index')
 
         return () => clearInterval(interval)
 
