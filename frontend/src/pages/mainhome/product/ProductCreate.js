@@ -15,7 +15,7 @@ export default function ProductCreate() {
   });
 
   const [productDetail, setProductDetail] = useState({
-    productStatus: "ปกติ",
+    productStatus: "normal",
     receiveDate: moment().toISOString(),
     expireDate: "",
     receiveQuantity: "",
@@ -42,7 +42,7 @@ export default function ProductCreate() {
       .post(process.env.REACT_APP_API + "/addProduct", {
         productName: product.productName,
         quantity: productDetail.receiveQuantity,
-        productStatus: "ปกติ",
+        productStatus: "normal",
         price: product.price,
         group: product.group,
       })

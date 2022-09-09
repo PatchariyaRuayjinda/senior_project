@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Switch, Select, Tag, Modal, Button } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons'
 import MenuBarAdmin from '../../components/layout/MenuBarAdmin'
 import { useSelector } from 'react-redux';
 import moment from 'moment/min/moment-with-locales';
@@ -18,12 +18,20 @@ export default function ManagaAdmin() {
     const {user} = useSelector((state) => ({...state}))
     const [data, setData] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [editadmin , setEditAdmin] = useState(false);
     const Swal = require('sweetalert2')
     const [value, setValue] = useState({
         id: '',
         password: '',
         confirmPassword: ''
     })
+
+    const adminEdit = (_id) => {
+        setEditAdmin(true);
+        setValue({...value,
+            id: _id
+        })
+    }
 
     const showModal = (_id) => {
         setIsModalVisible(true);
@@ -245,6 +253,7 @@ export default function ManagaAdmin() {
                                 {moment(item.updatedAt).locale('th').startOf(item.updatedAt).fromNow()}
                             </td>
                             <td style={{fontSize: '20px'}}>
+                                <FormOutlined style={{marginRight: '1rem'}} onClick={() => adminEdit(item._id)}/>
                                 <EditOutlined style={{marginRight: '1rem'}} onClick={() => showModal(item._id)}/>
                                 <DeleteOutlined onClick={()=> handleDelete(item._id)}/>
                             </td>
@@ -252,7 +261,19 @@ export default function ManagaAdmin() {
                         ))}  
                     </tbody>
                 </table>
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="Edit Profile" visible={editadmin} onOk={"handleOk"} onCancel={handleCancel}>
+                    <p style={{marginBottom: '-1px'}}>UserName</p>
+                    <input type="text" name="username" onChange={handleChangePassword} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>FirstName</p>
+                    <input type="text" name="firstname" onChange={handleChangePassword} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>SurName</p>
+                    <input type="text" name="surname" onChange={handleChangePassword} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>Email</p>
+                    <input type="text" name="email" onChange={handleChangePassword} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>Department</p>
+                    <input type="text" name="department" onChange={handleChangePassword} required/>
+                </Modal>
+                <Modal title="New Password" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p style={{marginBottom: '-1px'}}>New Password</p>
                     <input type="password" name="password" onChange={handleChangePassword} required/>
                     <p style={{marginTop: '2px', marginBottom: '0px'}}>Confirm New Password</p>

@@ -131,12 +131,12 @@ export default function DisbursementView() {
                 <td>{item.quantity}</td>
                 {/* <td>{product.date}</td> */}
                 <td>
-                  {moment(item.date).locale('th').format('lll')}
+                  {moment(item.date).locale('us').format('lll')}
                 </td>
                 {/* <td>{product.state}</td> */}
                 {item.state === true
-                ? <td>เบิกจ่าย</td>
-                : <td>เบิกคืน</td>
+                ? <td>Withdraw</td>
+                : <td>Return</td>
                 }
                 {/* <td>
                 <Link to={'/disbursementupdate/' + item._id } className='btn btn-outline-warning btn-sm mx-1'>

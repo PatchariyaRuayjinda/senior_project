@@ -105,14 +105,14 @@ export default function ProductDetailView() {
                 ))}
                 {/* <td>{product.productStatus}</td> */}
                 <td>
-                  {moment(productDetail.receiveDate).locale('th').format('ll')}
+                  {moment(productDetail.receiveDate).locale('us').format('ll')}
                 </td>
                 {/* <th>{product.expireDate}</th> */}
                 {/* <td>
                   {moment(productDetail.expireDate).locale('th').format('ll')}
                 </td> */}
                 {productDetail.expireDate != null
-                ? <td>{moment(productDetail.expireDate).locale('th').format('ll')}</td>
+                ? <td>{moment(productDetail.expireDate).locale('us').format('ll')}</td>
                 : <td>N/A</td>
                 }
                 <td>{productDetail.receiveQuantity}</td>

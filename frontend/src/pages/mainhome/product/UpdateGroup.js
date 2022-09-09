@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { findShelfByZone, updateShelf } from '../../../functions/productInShelf'
-
+import {findAllShelf} from '../../../functions/shelf'
+import Select from 'react-select'
 export default function UpdateGroup() {
     const {id, group} = useParams()
+    const [shelfNumber , setShrlfNumber] = useState([])
+    const [floorNumber , setFloorNumber] = useState([])
+    const [lockNumber , setLockNumber] = useState([])
+    const [shelf_id, setShelf_id] = useState('')
     const [value, setValue] = useState({
         _id: id,
         shelf_id: ''
     })
+
+    const handleChangeProduct = (e) => {
+        setShelf_id(e.value)
+        // console.log(e.label)
+        // console.log(e.value)
+    }
 
     useEffect(() => {
         findShelfByZone(group)
@@ -16,7 +27,31 @@ export default function UpdateGroup() {
         }).catch(err => {
             console.log(err.data)
         })
-    })
+        findAllShelf()
+        .then(res => {
+            const data = res.data
+            const shelfOption = data.map(shelf => ({
+                "value": shelf._id,
+                "label": shelf.shelfNumber,
+                // "label": shelf.floorNumber
+            }))
+            setShrlfNumber(shelfOption)
+            const shelfOption2 = data.map(shelf => ({
+                "value": shelf._id,
+                "label": shelf.floorNumber,
+                // "label": shelf.floorNumber
+            }))
+            setFloorNumber(shelfOption2)
+            const shelfOption3 = data.map(shelf => ({
+                "value": shelf._id,
+                "label": shelf.lockNumber,
+                // "label": shelf.floorNumber
+            }))
+            setLockNumber(shelfOption3)
+        }).catch(err => {
+            console.log(err.response.data)
+        })
+    },[])
 
     const handleChange = (e) => {
         setValue({...value,
@@ -54,19 +89,19 @@ export default function UpdateGroup() {
                     shelfNumber
                 </h5>
                 <div className="rounded-bottom border-0 col-2">
-                    {/* <Select options={shelfNumber} onChange={handleChangeProduct} required/> */}
+                    <Select options={shelfNumber} onChange={handleChangeProduct} required/>
                 </div>
                 <h5 className="mx-3" style={{margin : 'auto'}}>
                     floorNumber
                 </h5>
                 <div className="rounded-bottom border-0 col-2">
-                    {/* <Select options={floorNumber} onChange={handleChangeProduct} required/> */}
+                    <Select options={floorNumber} onChange={handleChangeProduct} required/>
                 </div>
                 <h5 className="mx-3" style={{margin : 'auto'}}>
                     lockNumber
                 </h5>
                 <div className="rounded-bottom border-0 col-2">
-                    {/* <Select options={lockNumber} onChange={handleChangeProduct} required/> */}
+                    <Select options={lockNumber} onChange={handleChangeProduct} required/>
                 </div>
                 {/* <input className="mx-5 rounded-bottom border-0" type="text" name="shelf" placeholder="Number add shelfNumber" required/> */}
                 {/* <input className="rounded-bottom border-0" type="text" name="floorNumber" placeholder="Number add floorNumber" required/> */}

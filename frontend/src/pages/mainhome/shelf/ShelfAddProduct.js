@@ -54,7 +54,7 @@ export default function ShelfAddProduct() {
                     Swal.fire(
                         'Successful Add Shelf',
                         'success',
-                        // navigate('/productdetailview')    
+                        navigate('/productdetailview')    
                     )
                 //     console.log(res.data)
                 // }).catch(err => {
