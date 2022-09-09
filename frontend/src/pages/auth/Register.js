@@ -129,7 +129,7 @@ export default function Register() {
                   <div class="row no-gutters align-items-center">
                       <div class="col-md-6">
                           <div class="form-wrap bg-white">
-                              <h4 class="btm-sep pb-3 mb-3">Register Page</h4>
+                              <h4 class="btm-sep pb-3 mb-3">Create user page</h4>
                               <form class="form" onSubmit={handleSubmit}>
                                   <div class="row">
                                       <div class="col-12">

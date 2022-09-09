@@ -179,7 +179,7 @@ export default function ManagaAdmin() {
             <div className='col-10 mt-5'>
                 <div className='row'>
 
-                <h1>Managa Warehouse Supervisor Page</h1>
+                <h1>Managa user Page</h1>
                 <text style={{paddingLeft: '200px'}}></text>
                 <a href='/register' className='mt-3 absbtn btn-primary py-0 my-4 btn-lg'>New User </a>
 
