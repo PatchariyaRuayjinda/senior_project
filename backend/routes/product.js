@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller
-const { findAllProduct, addProduct, updateProduct, deleteProduct, withdraw, returns, findOneProduct, findOneProduct2 } = require('../controllers/product')
+const { findAllProduct, addProduct, updateProduct, deleteProduct, withdraw, returns, findOneProduct, findOneProduct2, updateProductGroup } = require('../controllers/product')
 
 //@Endpoint http://localhost:3001/api/findAllproduct
 //@method GET
@@ -43,5 +43,10 @@ router.patch('/withdraw', withdraw)
 //@method PATCH
 //@Access Publish
 router.patch('/returns', returns)
+
+//@Endpoint http://localhost:3001/api/updateProductGroup
+//@method PATCH
+//@Access Publish
+router.patch('/updateProductGroup', updateProductGroup)
 
 module.exports = router

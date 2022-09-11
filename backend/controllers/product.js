@@ -231,3 +231,17 @@ exports.returns = async(req, res) => {
         res.status(500).send('Server Error!')
     }
 }
+
+exports.updateProductGroup = async(req, res) => {
+    try{
+        const {id, group} = req.body
+        await Product.findOneAndUpdate(
+            {_id: id},
+            {group: group}
+        )
+        res.send('Update Group Success!')
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}

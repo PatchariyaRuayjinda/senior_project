@@ -37,3 +37,10 @@ export const withdraw = async(id, quantity) => {
 export const findOneProduct2 = async(id) => {
     return await axios.get(process.env.REACT_APP_API + '/findOneProduct2/' + id)
 }
+
+export const updateProductGroup = async(id,value) => {
+    return await axios.patch(process.env.REACT_APP_API + '/updateProductGroup', {
+        id: id,
+        group: value
+    })
+}

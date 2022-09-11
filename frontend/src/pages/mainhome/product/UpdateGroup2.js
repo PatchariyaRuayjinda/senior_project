@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { findShelfByZone, updateProductInShelf } from '../../../functions/productInShelf'
 import {findAllShelf} from '../../../functions/shelf'
 import Select from 'react-select'
+import { updateProductGroup } from '../../../functions/product'
 export default function UpdateGroup() {
+    const navigate = useNavigate();
     const {id, group} = useParams()
     const [data, setData] = useState([])
     const [value, setValue] = useState({
@@ -38,29 +40,32 @@ export default function UpdateGroup() {
         }).catch(err => {
             console.log(err.response)
         })
+        updateProductGroup(id, group)
+        .then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err.response)
+        })
+        navigate('/export')
     }
 
   return (
-    <div className="container-fluid">
+    <div className="container   ">
     <div className="row">
         <h1 style={{marginTop:"100px"}}>
         </h1>
     </div>
     <form className='form' onSubmit={"handleSubmit"}>
-        <div className="card col-12 container py-2 text-center">
+        <div className="card col-10 container py-2 text-center">
             <div className="card-body">
             <h2 className="caed-title">
                 {/* {productD.productName} */}
             </h2>
-            <div className="row" style={{margin : 'auto'}}>
-                <h5 className="caed-title mx-2" style={{margin : 'auto' ,fontSize : '30px'}}>
-                    {/* Group {productD.group} */}
-                </h5>
-                <h5 className="mx-3" style={{margin : 'auto'}}>
+            <div className="row" style={{margin : 'auto '}}>
+                <h5 className="mx-3" style={{ fontSize : '30px'}}>
                     shelfNumber
                 </h5>
-                <div className="rounded-bottom border-0 col-2">
-
+                <div className="form-select form-select-lg mb-3 col-3" style={{margin : 'auto' ,fontSize : '20px', width: '50px' }}>
                 {/* <Select options={shelfNumber} onChange={(e) => onChangeShelf(e)} required/> */}
                 <select onChange={(e) => onChangeShelf(e)} defaultValue={"default"}>
                     <option value={"default"} disabled>
@@ -78,22 +83,10 @@ export default function UpdateGroup() {
                     )}
                 </select>
                 </div>
-                <h5 className="mx-3" style={{margin : 'auto'}}>
-                    floorNumber
-                </h5>
-                <div className="rounded-bottom border-0 col-2">
-                    {/* <Select options={floorNumber} onChange={handleChangeProduct} required/> */}
-                </div>
-                <h5 className="mx-3" style={{margin : 'auto'}}>
-                    lockNumber
-                </h5>
-                <div className="rounded-bottom border-0 col-2">
-                    {/* <Select options={lockNumber} onChange={handleChangeProduct} required/> */}
-                </div>
                 {/* <input className="mx-5 rounded-bottom border-0" type="text" name="shelf" placeholder="Number add shelfNumber" required/> */}
                 {/* <input className="rounded-bottom border-0" type="text" name="floorNumber" placeholder="Number add floorNumber" required/> */}
                 {/* <input className="mx-5 rounded-bottom border-0" type="text" name="lockNumber" placeholder="Number add lockNumber" required/> */}
-                <button className="btn btn-lg btn-outline-primary col-1" style={{margin : 'auto'}} onClick={(e) => handleSubmit(e)}>Submit</button>
+                <button className="btn btn-lg btn-outline-primary col-3"  style={{margin : 'auto'}} onClick={(e) => handleSubmit(e)}>Submit</button>
             </div>
             
         </div>
