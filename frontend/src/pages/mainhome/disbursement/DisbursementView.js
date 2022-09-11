@@ -5,12 +5,12 @@ import Sidebar from '../../../components/layout/Sidebar'
 import { Link } from 'react-router-dom'
 import moment from 'moment/min/moment-with-locales'
 import { returns, withdraw } from '../../../functions/product'
-
+import { useDispatch, useSelector } from 'react-redux';
 export default function DisbursementView() {
   const [disbursements,setDisbursement] = useState([])
-  const [user, setUser] = useState([])
+  // const [user, setUser] = useState([])
   const Swal = require('sweetalert2')
-
+  const { user } = useSelector((state) => ({...state}))
   const buttondelete = (id, productID, quantity, state) =>{
     Swal.fire({
       title: 'Are you sure?',
@@ -95,10 +95,19 @@ export default function DisbursementView() {
             <h1 class=' mt-3'>Disbursement View</h1>
           </div>
           <div className='col-2'>
-            <Link to='/disbursementcreate' class='btn btn-primary py-1 my-3 btn-lg'>Withdraw</Link>
+            {
+              user.position === 'Warehouse Staff' && <>
+                <Link to='/disbursementcreate' class='btn btn-primary py-1 my-3 btn-lg'>Withdraw</Link>
+              </>
+            }
+            
           </div>
           <div className='col-2'>
-            <Link to='/withdrawcreate' class='btn btn-success py-1 my-3 btn-lg'>Return</Link>
+          {
+              user.position === 'Warehouse Staff' && <>
+                <Link to='/withdrawcreate' class='btn btn-success py-1 my-3 btn-lg'>Return</Link>
+              </>
+            }
           </div>
           
         </div>
