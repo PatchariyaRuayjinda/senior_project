@@ -68,3 +68,12 @@ export const findUserByName = async(authtoken, username) => {
         }
     })
 }
+
+export const updateProfileUser = async(authtoken, value) => {
+    return await axios.patch(process.env.REACT_APP_API + '/updateProfileUser', value,
+    {
+        headers:{
+            authtoken
+        }
+    })
+}

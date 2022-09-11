@@ -9,7 +9,8 @@ const {listUsers,
     changeStatus,
     changeRole,
     findUserByName,
-    changePosition
+    changePosition,
+    updateProfileUser
 } = require('../controllers/user')
 
 // middleware
@@ -34,6 +35,12 @@ router.get('/findUserByname/:username', auth, findUserByName)
 //@method PUT
 //@Access Private
 router.put('/updateUsers/:id',auth, authAdmin, updateUsers)
+
+//@Endpoint http://localhost:3001/api/updateProfileUser
+//@method PATCH
+//@Access Private
+router.patch('/updateProfileUser',auth, authAdmin, updateProfileUser)
+
 
 //@Endpoint http://localhost:3001/api/deleteUser/:id
 //@method DELETE

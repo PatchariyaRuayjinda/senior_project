@@ -182,6 +182,37 @@ exports.findAllProductInShelf = async(req, res)=>{
     }
 }
 
+exports.findProductInShelf = async(req, res)=>{
+    try{
+        const findInShelf = await ProductInShelf.aggregate([
+            {$lookup:{
+                from: 'products',
+                localField: 'product_id',
+                foreignField: '_id',
+                as: 'product'
+            }},
+            {$lookup: {
+                from: "shelves",
+                localField: "shelf_id",
+                foreignField: "_id",
+                as: "shelf"
+            }},
+            {"$project": {
+                "product_id": 1,
+                "product.productName": 1,
+                "product.group": 1,
+                "shelf.shelfNumber": 1,
+                "shelf.floorNumber": 1,
+                "shelf.lockNumber": 1
+            }}
+        ])
+        res.send(findInShelf)
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
+
 exports.addInShelf = async(req, res) => {
     try {
         // console.log(req.body)
@@ -217,7 +248,7 @@ exports.updateShelf = async(req, res) => {
             shelf_id
         }
         await ProductInShelf.updateOne(
-            {_id: _id},
+            {product_id: _id},
             {$set: newProductInShelf}
         )
         res.send('Update Shelf in Product Success!')

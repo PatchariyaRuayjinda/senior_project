@@ -26,7 +26,7 @@ import ShelfCreate from "./pages/mainhome/shelf/ShelfCreate";
 import ShelfUpdate from "./pages/mainhome/shelf/ShelfUpdate";
 import InMovement from "./pages/mainhome/product/InMovement";
 import ShelfAddProduct from "./pages/mainhome/shelf/ShelfAddProduct";
-import UpdateGroup from "./pages/mainhome/product/UpdateGroup";
+import UpdateGroup from "./pages/mainhome/product/UpdateGroup2";
 import Export from "./pages/mainhome/product/Export2";
 // Layout
 import Header from "./components/layout/Header";
