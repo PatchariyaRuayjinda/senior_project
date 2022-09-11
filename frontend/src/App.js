@@ -67,6 +67,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div>
       <Routes>
         <Route
           path="/user/index"
@@ -265,6 +266,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
       </Routes>
+      </div>
+      
     </div>
   );
 }

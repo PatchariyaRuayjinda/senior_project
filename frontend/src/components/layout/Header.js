@@ -47,7 +47,7 @@ export default function Header() {
 
             {user && <>
                 <Menu.Item key="mail" icon={<HomeOutlined />}>
-                    {user.position === 'Manager'
+                    {user.position === 'Admin'
                     ? <Link to='/admin/index'>Home</Link>
                     : <Link to='/user/index'>Home</Link>
                     }
