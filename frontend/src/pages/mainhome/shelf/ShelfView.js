@@ -92,7 +92,7 @@ export default function ShelfView() {
                 <th scope='col'>ShelfNumber</th>
                 <th scope='col'>FloorNumber</th>
                 <th scope='col'>LockNumber</th>
-                {/* <th scope='col'>ShelfStatus</th> */}
+                <th scope='col'>ShelfStatus</th>
                 <th scope='col'>Zone</th>
                 {
             user.position === 'Warehouse Staff' && <>
@@ -110,10 +110,10 @@ export default function ShelfView() {
                 <td>{shelf.floorNumber}</td>
                 <td>{shelf.lockNumber}</td>
                 {/* <td>{shelf.shelfStatus}</td> */}
-                {/* {shelf.shelfStatus == true
-                ? <td>ไม่ว่าง</td>
-                : <td>ว่าง</td>
-                } */}
+                {shelf.shelfStatus == true
+                ? <td>Not empty</td>
+                : <td>Empty</td>
+                }
                 <td>{shelf.zone}</td>
                 {/* {shelf.zone.map((zone) => (
                   <td>{zone.zone}</td>

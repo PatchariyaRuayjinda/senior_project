@@ -109,8 +109,8 @@ export default function ShelfUpdate() {
                                         {statusShelf.map((status, index) => (
                                             <Select.Option value={status} key={index}>
                                                 {status === true
-                                                ? <Tag color={"green"}>ไม่ว่าง</Tag>
-                                                : <Tag color={"red"}>ว่าง</Tag>
+                                                ? <Tag color={"red"}>Not empty</Tag>
+                                                : <Tag color={"green"}>Empty</Tag>
                                                 }
                                             </Select.Option>
                                         ))}
