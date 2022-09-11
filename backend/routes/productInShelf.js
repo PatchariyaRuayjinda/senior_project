@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {findAllProductInShelf , addInShelf, findShelfByZone, updateShelf, updateShelfProduct, findProductInShelf} = require('../controllers/productInShelf')
+const {findAllProductInShelf , addInShelf, findShelfByZone, findProductInShelf, updateProductInShelf} = require('../controllers/productInShelf')
 
 //@Endpoint http://localhost:3001/api/findAllProductInShelf
 //@method GET
@@ -23,9 +23,9 @@ router.post('/addInShelf', addInShelf)
 //@Access Publish
 router.get('/findShelfByZone/:zone', findShelfByZone)
 
-//@Endpoint http://localhost:3001/api/updateShelf
+//@Endpoint http://localhost:3001/api/updateProductInShelf
 //@method PUT
 //@Access Publish
-router.put('/updateShelf', updateShelf)
+router.put('/updateProductInShelf', updateProductInShelf)
 
 module.exports = router

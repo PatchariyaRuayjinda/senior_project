@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { findShelfByZone, updateShelf } from '../../../functions/productInShelf'
+import { findShelfByZone, updateProductInShelf } from '../../../functions/productInShelf'
 import {findAllShelf} from '../../../functions/shelf'
 import Select from 'react-select'
 export default function UpdateGroup() {
@@ -8,7 +8,8 @@ export default function UpdateGroup() {
     const [data, setData] = useState([])
     const [value, setValue] = useState({
         _id: id,
-        shelf_id: ''
+        shelf_id: '',
+        shelfStatus: true
     })
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function UpdateGroup() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(value)  
-        updateShelf(value)
+        updateProductInShelf(value)
         .then(res => {
             console.log(res.data)
         }).catch(err => {

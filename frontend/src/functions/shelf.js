@@ -19,3 +19,7 @@ export const deleteShelf = async(id) =>{
 export const findOneShelf = async(id) =>{
     return await axios.get(process.env.REACT_APP_API + '/findOneShelf/' + id)
 }
+
+export const findShelfByZoneFalse = async(group) => {
+    return await axios.get(process.env.REACT_APP_API + '/findShelfByZoneFalse/' + group)
+}

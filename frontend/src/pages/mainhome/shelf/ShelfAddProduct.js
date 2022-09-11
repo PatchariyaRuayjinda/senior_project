@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { findOneProduct } from '../../../functions/product';
-import {findAllShelf} from '../../../functions/shelf'
-import { findShelfByZone } from "../../../functions/productInShelf";
+import { findShelfByZoneFalse } from "../../../functions/shelf";
 
 export default function ShelfAddProduct() {
     const navigate = useNavigate();
@@ -48,7 +47,8 @@ export default function ShelfAddProduct() {
                 // floorNumber: label.floorNumber,
                 // lockNumber: label.lockNumber,
                 product_id: id,
-                shelf_id: shelf_id
+                shelf_id: shelf_id,
+                shelfStatus: true
             }).then(async(res) => {
                 // await withdraw(product_id, value.receiveQuantity)
                 // .then(res => {
@@ -75,7 +75,7 @@ export default function ShelfAddProduct() {
             setProductD(res.data)
             findShelf(res.data.group)
         }).catch(err => {
-            console.log(err.prsponse.data)
+            console.log(err.response.data)
         })
         // findAllShelf()
         // .then(res => {
@@ -88,7 +88,7 @@ export default function ShelfAddProduct() {
 
     const findShelf = (group) =>{
         // console.log(group)
-        findShelfByZone(group)
+        findShelfByZoneFalse(group)
         .then(res => {
             console.log(res.data)
             setData(res.data)

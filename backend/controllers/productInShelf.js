@@ -216,11 +216,15 @@ exports.findProductInShelf = async(req, res)=>{
 exports.addInShelf = async(req, res) => {
     try {
         // console.log(req.body)
-        const {product_id, shelf_id} = req.body
+        const {product_id, shelf_id, shelfStatus} = req.body
         var payload = new ProductInShelf({
             product_id,
             shelf_id,
         })
+        await Shelf.findOneAndUpdate(
+            {_id: shelf_id},
+            {shelfStatus: shelfStatus}
+        )
         await payload.save()
         res.send('add Product Shelf Success!')
     }catch(err){
@@ -231,7 +235,6 @@ exports.addInShelf = async(req, res) => {
 
 exports.findShelfByZone = async(req, res) => {
     try{
-        console.log('ss')
         const {zone} = req.params
         const shelf = await Shelf.find({"zone": zone})
         res.send(shelf)
@@ -241,15 +244,19 @@ exports.findShelfByZone = async(req, res) => {
     }
 }
 
-exports.updateShelf = async(req, res) => {
+exports.updateProductInShelf = async(req, res) => {
     try{
-        const { _id, shelf_id} = req.body
+        const { _id, shelf_id, shelfStatus} = req.body
         var newProductInShelf = {
             shelf_id
         }
         await ProductInShelf.updateOne(
             {product_id: _id},
             {$set: newProductInShelf}
+        )
+        await Shelf.findOneAndUpdate(
+            {_id: shelf_id},
+            {shelfStatus: shelfStatus}
         )
         res.send('Update Shelf in Product Success!')
     }catch(err){

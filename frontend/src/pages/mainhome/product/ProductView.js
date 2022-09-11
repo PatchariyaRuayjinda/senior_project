@@ -98,7 +98,7 @@ const handleCancel = () => {
       .catch(err=>{
         console.log(err.response)
       });
-      findOneProduct(_id)
+      // findOneProduct(_id)
   },[])
   return (
     <div class='container-fluid'>
