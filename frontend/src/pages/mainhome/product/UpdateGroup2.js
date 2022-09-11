@@ -5,15 +5,11 @@ import {findAllShelf} from '../../../functions/shelf'
 import Select from 'react-select'
 export default function UpdateGroup() {
     const {id, group} = useParams()
-    // console.log(id)
     const [data, setData] = useState([])
-    // const [shelf, setShelf] = useState([])
     const [value, setValue] = useState({
         _id: id,
         shelf_id: ''
     })
-
-    const [select, setSelect] = useState("")
 
     useEffect(() => {
         findShelfByZone(group)
@@ -67,16 +63,16 @@ export default function UpdateGroup() {
                 {/* <Select options={shelfNumber} onChange={(e) => onChangeShelf(e)} required/> */}
                 <select onChange={(e) => onChangeShelf(e)} defaultValue={"default"}>
                     <option value={"default"} disabled>
-                        select shelfs
+                        Select Shelfs
                     </option>
                     {data.map((item, index) => 
                         <option
                             // key={index}
                             value={item._id}
                         >
-                            shelf: {item.shelfNumber}
-                            floor: {item.floorNumber}
-                            lock: {item.lockNumber}
+                            Shelf: {item.shelfNumber}
+                            Floor: {item.floorNumber}
+                            Lock: {item.lockNumber}
                         </option>
                     )}
                 </select>
