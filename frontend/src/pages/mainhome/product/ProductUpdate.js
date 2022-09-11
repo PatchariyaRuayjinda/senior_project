@@ -66,7 +66,7 @@ export default function ProductUpdate() {
         })
     }
     
-    const statusProduct = ['ปกติ', 'ไม่ใช้งาน']
+    const statusProduct = ['normal', 'inactive']
 
     const handleChangeProductStatus = (e) => {
         setProduct({...product,
@@ -112,9 +112,9 @@ export default function ProductUpdate() {
                                 >
                                     {statusProduct.map((status, index) => (
                                         <Select.Option value={status} key={index}>
-                                            {status === 'ปกติ'
-                                            ? <Tag color={"green"}>ปกติ</Tag>
-                                            : <Tag color={"red"}>ไม่ใช้งาน</Tag>
+                                            {status === 'normal'
+                                            ? <Tag color={"green"}>normal</Tag>
+                                            : <Tag color={"red"}>inactive</Tag>
                                             }
                                         </Select.Option>
                                     ))}
