@@ -8,6 +8,6 @@ export const findShelfByZone = async(zone) => {
     return await axios.get(process.env.REACT_APP_API + '/findShelfByZone/' + zone)
 }
 
-export const updateShelf = async(value) => {
+export const updateProductInShelf = async(value) => {
     return await axios.put(process.env.REACT_APP_API + '/updateShelf', value)
 }

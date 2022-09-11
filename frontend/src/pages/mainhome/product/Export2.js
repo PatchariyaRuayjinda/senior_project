@@ -63,7 +63,7 @@ export default function Export2() {
           .then((res) => {
             console.log(res.data)
             setMovement(res.data);
-            console.log(movement)
+            // console.log(movement)
           })
           .catch((err) => {
             console.log(err.response.data);

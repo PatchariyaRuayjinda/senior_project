@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller 
-const { findAllShelf, addShelf, updateShelf, deleteShelf, findOneShelf } = require('../controllers/shelf')
+const { findAllShelf, addShelf, updateShelf, deleteShelf, findOneShelf, findShelfByZoneFalse } = require('../controllers/shelf')
 
 //@Endpoint http://localhost:3001/api/findAllShelf
 //@method GET
@@ -13,6 +13,11 @@ router.get('/findAllShelf', findAllShelf)
 //@method GET
 //@Access Publish
 router.get('/findOneShelf/:id', findOneShelf)
+
+//@Endpoint http://localhost:3001/api/findShelfByZoneFalse
+//@method GET
+//@Access Publish
+router.get('/findShelfByZoneFalse/:zone', findShelfByZoneFalse)
 
 //@Endpoint http://localhost:3001/api/addShelf
 //@method POST

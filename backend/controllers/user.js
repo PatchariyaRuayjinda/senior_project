@@ -63,6 +63,35 @@ exports.updateUsers = async(req, res, next) => {
     }
 }
 
+exports.updateProfileUser = async(req, res, next) => {
+    try{
+        console.log(req.body)
+        const {
+            id,
+            username,
+            firstname,
+            surname,
+            email,
+            department
+        } = req.body
+        var newUser = {
+            username,
+            firstname,
+            surname,
+            email,
+            department
+        }
+        await User.updateOne(
+            {_id: id},
+            {$set: newUser}
+        )
+        res.send('Update Profile User Success!')
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
+
 exports.deleteUser = async(req, res, next) => {
     try{
         const { id } = req.params

@@ -1,19 +1,15 @@
 import React, {useEffect,useState} from "react";
-import Select from 'react-select'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import { findOneProduct } from '../../../functions/product';
-import {findAllShelf} from '../../../functions/shelf'
+import { findShelfByZoneFalse } from "../../../functions/shelf";
 
 export default function ShelfAddProduct() {
     const navigate = useNavigate();
     const [productD,setProductD] = useState([])
     const [shelf_id, setShelf_id] = useState('')
-    const [shelfNumber , setShrlfNumber] = useState([])
-    const [floorNumber , setFloorNumber] = useState([])
-    const [lockNumber , setLockNumber] = useState([])
+    const [data, setData] = useState([])
     // const [shelf , setShrlf] = useState({
     //     shelfNumber: "",
     //     floorNumber: "",
@@ -29,6 +25,10 @@ export default function ShelfAddProduct() {
         // console.log(e.value)
     }
     // console.log(id)
+
+    const onChangeShelf = (e) => {
+        setShelf_id(e.target.value)
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -47,7 +47,8 @@ export default function ShelfAddProduct() {
                 // floorNumber: label.floorNumber,
                 // lockNumber: label.lockNumber,
                 product_id: id,
-                shelf_id: shelf_id
+                shelf_id: shelf_id,
+                shelfStatus: true
             }).then(async(res) => {
                 // await withdraw(product_id, value.receiveQuantity)
                 // .then(res => {
@@ -69,37 +70,32 @@ export default function ShelfAddProduct() {
 
     useEffect(()=>{
         findOneProduct(id)
-        .then(response =>{
-            // console.log(response.data)
-            setProductD(response.data)
-        }).catch(err => {
-            console.log(err.prsponse.data)
-        })
-        findAllShelf()
-        .then(res => {
-            const data = res.data
-            const shelfOption = data.map(shelf => ({
-                "value": shelf._id,
-                "label": shelf.shelfNumber,
-                // "label": shelf.floorNumber
-            }))
-            setShrlfNumber(shelfOption)
-            const shelfOption2 = data.map(shelf => ({
-                "value": shelf._id,
-                "label": shelf.floorNumber,
-                // "label": shelf.floorNumber
-            }))
-            setFloorNumber(shelfOption2)
-            const shelfOption3 = data.map(shelf => ({
-                "value": shelf._id,
-                "label": shelf.lockNumber,
-                // "label": shelf.floorNumber
-            }))
-            setLockNumber(shelfOption3)
+        .then(res =>{
+            // console.log(rse.data)
+            setProductD(res.data)
+            findShelf(res.data.group)
         }).catch(err => {
             console.log(err.response.data)
         })
+        // findAllShelf()
+        // .then(res => {
+        //    console.log(res.data)
+        //    setData(res.data)
+        // }).catch(err => {
+        //     console.log(err.response.data)
+        // })
     }, [])
+
+    const findShelf = (group) =>{
+        // console.log(group)
+        findShelfByZoneFalse(group)
+        .then(res => {
+            console.log(res.data)
+            setData(res.data)
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }
 
     return(
         <div className="container-fluid">
@@ -121,19 +117,33 @@ export default function ShelfAddProduct() {
                             shelfNumber
                         </h5>
                         <div className="rounded-bottom border-0 col-2">
-                            <Select options={shelfNumber} onChange={handleChangeProduct} required/>
+                            {/* <Select options={shelfNumber} onChange={handleChangeProduct} required/> */}
+                            <select onChange={(e) => onChangeShelf(e)} defaultValue={"default"}>
+                                <option value={"default"} disabled>
+                                    Select Shelfs
+                                </option>
+                                {data.map((item) =>
+                                    <option
+                                        value={item._id}
+                                    >
+                                        Shelf: {item.shelfNumber}
+                                        Floor: {item.floorNumber}
+                                        Lock: {item.lockNumber}
+                                    </option>
+                                )}
+                            </select>
                         </div>
                         <h5 className="mx-3" style={{margin : 'auto'}}>
                             floorNumber
                         </h5>
                         <div className="rounded-bottom border-0 col-2">
-                            <Select options={floorNumber} onChange={handleChangeProduct} required/>
+                            {/* <Select options={floorNumber} onChange={handleChangeProduct} required/> */}
                         </div>
                         <h5 className="mx-3" style={{margin : 'auto'}}>
                             lockNumber
                         </h5>
                         <div className="rounded-bottom border-0 col-2">
-                            <Select options={lockNumber} onChange={handleChangeProduct} required/>
+                            {/* <Select options={lockNumber} onChange={handleChangeProduct} required/> */}
                         </div>
                         {/* <input className="mx-5 rounded-bottom border-0" type="text" name="shelf" placeholder="Number add shelfNumber" required/> */}
                         {/* <input className="rounded-bottom border-0" type="text" name="floorNumber" placeholder="Number add floorNumber" required/> */}

@@ -11,7 +11,8 @@ import { listUser,
     changeRole,
     changePosition,
     deleteUser,
-    resetPassword
+    resetPassword,
+    updateProfileUser
 } from '../../functions/users';
 
 export default function ManagaAdmin() {
@@ -25,11 +26,25 @@ export default function ManagaAdmin() {
         password: '',
         confirmPassword: ''
     })
+    const [profile, setProfile] = useState({
+        id: '',
+        username: '',
+        firstname: '',
+        surname: '',
+        email: '',
+        department: ''
+    })
 
-    const adminEdit = (_id) => {
-        setEditAdmin(true);
-        setValue({...value,
-            id: _id
+    const adminEdit = async(item) => {
+        // console.log(item)
+        await setEditAdmin(true);
+        setProfile({...profile,
+            id: item._id,
+            username: item.username,
+            firstname: item.firstname,
+            surname: item.surname,
+            email: item.email,
+            department: item.department
         })
     }
 
@@ -44,6 +59,21 @@ export default function ManagaAdmin() {
         // console.log(e.target.name)
         // console.log(e.target.value)
         setValue({...value, [e.target.name]: e.target.value})
+    }
+
+    const handleOk2 = () => {
+        setEditAdmin(false);
+        updateProfileUser(user.token, profile)
+        .then(res => {
+            // console.log(res.data)
+            Swal.fire(
+                res.data,
+                'success'
+            )
+            loadData(user.token)
+        }).catch(err => {
+            console.log(err.response.data)
+        })
     }
 
     const handleOk = () => {
@@ -70,6 +100,10 @@ export default function ManagaAdmin() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    const handleCancel2 = () => {
+        setEditAdmin(false);
+    }
 
     useEffect(() => {
         loadData(user.token)
@@ -178,6 +212,12 @@ export default function ManagaAdmin() {
           })
     }
 
+    const handleChangeProfile = (e) => {
+        setProfile({...profile, [
+            e.target.name]: e.target.value
+        })
+    }
+
   return (
     <div className='container-fluid'>
         <div className='row'>
@@ -247,13 +287,13 @@ export default function ManagaAdmin() {
                                 onChange={(e)=>handleChangeStatus(e, item._id)}/>
                             </td> */}
                             <td>
-                                {moment(item.createdAt).locale('th').format('ll')}
+                                {moment(item.createdAt).locale('en').format('ll')}
                             </td>
                             <td>
-                                {moment(item.updatedAt).locale('th').startOf(item.updatedAt).fromNow()}
+                                {moment(item.updatedAt).locale('en').startOf(item.updatedAt).fromNow()}
                             </td>
                             <td style={{fontSize: '20px'}}>
-                                <FormOutlined style={{marginRight: '1rem'}} onClick={() => adminEdit(item._id)}/>
+                                <FormOutlined style={{marginRight: '1rem'}} onClick={() => adminEdit(item)}/>
                                 <EditOutlined style={{marginRight: '1rem'}} onClick={() => showModal(item._id)}/>
                                 <DeleteOutlined onClick={()=> handleDelete(item._id)}/>
                             </td>
@@ -261,17 +301,17 @@ export default function ManagaAdmin() {
                         ))}  
                     </tbody>
                 </table>
-                <Modal title="Edit Profile" visible={editadmin} onOk={"handleOk"} onCancel={handleCancel}>
-                    <p style={{marginBottom: '-1px'}}>UserName</p>
-                    <input type="text" name="username" onChange={handleChangePassword} required/>
-                    <p style={{marginTop: '2px', marginBottom: '0px'}}>FirstName</p>
-                    <input type="text" name="firstname" onChange={handleChangePassword} required/>
-                    <p style={{marginTop: '2px', marginBottom: '0px'}}>SurName</p>
-                    <input type="text" name="surname" onChange={handleChangePassword} required/>
-                    <p style={{marginTop: '2px', marginBottom: '0px'}}>Email</p>
-                    <input type="text" name="email" onChange={handleChangePassword} required/>
+                <Modal title="Edit Profile" visible={editadmin} onOk={handleOk2} onCancel={handleCancel2}>
+                    <p style={{marginBottom: '-1px'}}>Username</p>
+                    <input type="text" name="username" value={profile.username} onChange={handleChangeProfile} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>Firstname</p>
+                    <input type="text" name="firstname" value={profile.firstname} onChange={handleChangeProfile} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>Surname</p>
+                    <input type="text" name="surname" value={profile.surname} onChange={handleChangeProfile} required/>
+                    <p style={{marginTop: '2px', marginBottom: '0px'}}>E-mail</p>
+                    <input type="text" name="email" value={profile.email} onChange={handleChangeProfile} required/>
                     <p style={{marginTop: '2px', marginBottom: '0px'}}>Department</p>
-                    <input type="text" name="department" onChange={handleChangePassword} required/>
+                    <input type="text" name="department" value={profile.department} onChange={handleChangeProfile} required/>
                 </Modal>
                 <Modal title="New Password" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p style={{marginBottom: '-1px'}}>New Password</p>
