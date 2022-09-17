@@ -5,6 +5,7 @@ import {findAllShelf} from '../../../functions/shelf'
 import Select from 'react-select'
 import { updateProductGroup } from '../../../functions/product'
 export default function UpdateGroup() {
+    const Swal = require('sweetalert2')
     const navigate = useNavigate();
     const {id, group} = useParams()
     const [data, setData] = useState([])
@@ -42,6 +43,11 @@ export default function UpdateGroup() {
         })
         updateProductGroup(id, group)
         .then(res => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Edit Shelf group Success',
+                // text: err.response.data
+            })
             console.log(res.data)
         }).catch(err => {
             console.log(err.response)
