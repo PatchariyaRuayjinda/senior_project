@@ -234,6 +234,7 @@ exports.returns = async(req, res) => {
 
 exports.updateProductGroup = async(req, res) => {
     try{
+        console.log(req.body)
         const {id, group} = req.body
         await Product.findOneAndUpdate(
             {_id: id},

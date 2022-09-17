@@ -174,7 +174,7 @@ exports.findAllProductInShelf = async(req, res)=>{
             // productDetail[index].totalQuantity = "C"
         }
 }
-        console.log(productABC)
+        // console.log(productABC)
         res.send(productABC)
     }catch(err){
         console.log(err)
