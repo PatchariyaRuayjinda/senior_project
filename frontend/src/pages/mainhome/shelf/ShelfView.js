@@ -75,29 +75,36 @@ export default function ShelfView() {
   const columns = [
     {
       title: 'ShelfNumber',
-      dataindex: 'shelfNumber',
+      dataIndex: 'shelfNumber',
       key: 'shelfNumber',
       // render: (number) => <a>{number}</a>,
     },
     {
       title: 'FloorNumber',
-      dataindex: 'floorNumber',
+      dataIndex: 'floorNumber',
       key: 'floorNumber',
     },
     {
       title: 'LockNumber',
-      dataindex: 'lockNumber',
+      dataIndex: 'lockNumber',
       key: 'lockNumber',
     },
     {
       title: 'ShelfStatus',
-      dataindex: 'shelfStatus',
+      dataIndex: 'shelfStatus',
       key: 'shelfStatus',
-      // render: (text) => <a>{text}</a>,
+      render: (shelfs) => (
+        <>
+              {shelfs == true
+                ? <p>Not empty</p>
+                : <p>Empty</p>
+              }
+        </>
+      )
     },
     {
       title: 'Zone',
-      dataindex: 'zone',
+      dataIndex: 'zone',
       key: 'zone',
     },
     {
@@ -140,10 +147,7 @@ export default function ShelfView() {
           
         </div>
         <Table dataSource={shelfs} columns={columns}  />
-        {
-          console.log(shelfs)
-        }
-          <table class='table table-bordered table-light' >
+          {/* <table class='table table-bordered table-light' >
             <thead>
               <tr>
                 <th scope='col'>#</th>
@@ -167,15 +171,11 @@ export default function ShelfView() {
                 <td>{shelf.shelfNumber}</td>
                 <td>{shelf.floorNumber}</td>
                 <td>{shelf.lockNumber}</td>
-                {/* <td>{shelf.shelfStatus}</td> */}
                 {shelf.shelfStatus == true
                 ? <td>Not empty</td>
                 : <td>Empty</td>
                 }
                 <td>{shelf.zone}</td>
-                {/* {shelf.zone.map((zone) => (
-                  <td>{zone.zone}</td>
-                ))} */}
                { user.position === 'Warehouse Staff' && <>
             <td>
               <Link to={'/shelfupdate/' + shelf._id } className='btn btn-outline-warning btn-sm mx-1'>
@@ -195,7 +195,7 @@ export default function ShelfView() {
               </tr>
             </tbody>
             ))}
-          </table>
+          </table> */}
       </div>
       </div>
       </div>
