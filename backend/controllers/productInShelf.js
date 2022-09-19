@@ -26,7 +26,7 @@ exports.findAllProductInShelf = async(req, res)=>{
                 "shelf.floorNumber": 1,
                 "shelf.lockNumber": 1
             }}
-        ])
+        ]).sort({_id: -1})
         const disbursementPlus = await Disbursement.aggregate([
             {
                 $match:{state:true}

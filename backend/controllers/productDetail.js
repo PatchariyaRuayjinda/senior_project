@@ -11,7 +11,7 @@ exports.findAllProductDetail = async(req, res) => {
                 foreignField: '_id',
                 as: 'product'
             }}
-        ])
+        ]).sort({_id: -1})
         res.send(productDetail)
     }catch{
         console.log(err)

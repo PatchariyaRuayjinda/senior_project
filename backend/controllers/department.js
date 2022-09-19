@@ -2,7 +2,7 @@ const Department = require('../models/department')
 
 exports.findAllDepartment = async(req, res, next) => {
     try{
-        const department = await Department.find({})
+        const department = await Department.find({}).sort({_id: -1})
         res.send(department)
     }catch(err){
         console.log(err)

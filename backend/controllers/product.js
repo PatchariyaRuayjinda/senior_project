@@ -7,7 +7,7 @@ var mongo = require('mongodb');
 
 exports.findAllProduct = async(req, res, next) => {
     try{
-        const product = await Product.find({})
+        const product = await Product.find({}).sort({_id: -1})
         res.send(product)
     }catch(err){
         console.log(err)

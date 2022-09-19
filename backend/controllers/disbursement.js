@@ -27,7 +27,7 @@ exports.findAllDisbursement = async(req, res) => {
                     "user.firstname": 1
                 }}
             ]
-        )
+        ).sort({_id: -1})
         res.send(disbursement)
     }catch(err){
         console.log(err)

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
+import { Space, Table, Tag } from 'antd';
 import {findAllProduct, findOneProduct, findOneProduct2} from '../../../functions/product'
 import Sidebar from '../../../components/layout/Sidebar'
 import { Link,useParams } from 'react-router-dom'
@@ -24,7 +25,95 @@ export default function ProductView() {
   const [value, setValue] = useState({
     id: '',
 })
+// const index = 1
+const columns = [
+  {
+    title: 'ProductName',
+    dataIndex: 'productName',
+    key: 'productName',
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: 'Quantity',
+    dataIndex: "quantity",
+    key: 'quantity',
+  },
+  {
+    title: 'ProductStatus',
+    dataIndex: 'productStatus',
+    key: 'productStatus',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Group',
+    dataIndex: 'group',
+    key: 'group',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, products) => (
+      // {products.map((product)=>{
 
+      // })}
+      <Space size="middle">
+        {/* <a>Invite {products._id}</a> */}
+        <button className='btn btn-outline-info btn-sm' onClick={() => showModal(products._id)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+          </svg>
+        </button>
+        {
+          user.position === 'Warehouse Staff' && <>
+          <Link to={'/productupdate/' + products._id } className='btn btn-outline-warning btn-sm mx-1'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </Link>
+          </>
+        }
+      </Space>
+    ),
+  },
+];
+// products.map((product,index)=>{
+//   const data = [{
+//     key: index+1,
+//     name: product.productName
+//   }];
+// })
+// const data = [
+//   products.map((product,index)=>{
+//     // key: index+1
+//   }),
+//   {
+//     key: '1',
+//     name: 'John Brown',
+//     age: 32,
+//     address: 'New York No. 1 Lake Park',
+//     tags: ['nice', 'developer'],
+//   },
+//   {
+//     key: '2',
+//     name: 'Jim Green',
+//     age: 42,
+//     address: 'London No. 1 Lake Park',
+//     tags: ['loser'],
+//   },
+//   {
+//     key: '3',
+//     name: 'Joe Black',
+//     age: 32,
+//     address: 'Sidney No. 1 Lake Park',
+//     tags: ['cool', 'teacher'],
+//   },
+// ];
 const showModal = async(_id) => {
   setIsModalVisible(true);
   // setValue({...value,
@@ -115,8 +204,8 @@ const handleCancel = () => {
           }
             
         </div>
-          
-          <table class='table table-bordered table-light' >
+        <Table columns={columns} dataSource={products} />
+          {/* <table class='table table-bordered table-light' >
             <thead>
               <tr>
                 <th scope='col'>#</th>
@@ -153,7 +242,7 @@ const handleCancel = () => {
                     </svg>
                   </Link>
                     </>
-                  }
+                  } */}
                   
                   {/* <button type="button" class="btn btn-outline-danger btn-sm" onClick={()=>buttondelete(product._id, product.quantity)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -161,12 +250,12 @@ const handleCancel = () => {
                     </svg>
                   </button> */}
                   {/* <ModalView /> */}
-                </td>
+                {/* </td>
                 
               </tr>
             </tbody>
             ))}
-          </table>
+          </table> */}
           <Modal title={productModal.productName} visible={isModalVisible} onCancel={handleCancel}>
 
           {/* <p style={{marginBottom: '-1px'}}>productName: {productModal.productName}</p> */} 
