@@ -6,12 +6,19 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon app.js",
-        "start-server": "node app.js"
+        "start-server": "node app.js",
+        "dev": "nodemon app.js",
+        "migrate-status": "dotenv -- cross-var \"echo DB_HOST = %DB_HOST%\n echo DB_NAME = %DB_NAME%\" && migrate-mongo status",
+        "migrate-up": "dotenv -- cross-var \"echo DB_HOST = %DB_HOST%\n echo DB_NAME = %DB_NAME%\" && cli-confirm \"The DB_HOST in env is correct?(type y/n)\" && migrate-mongo up",
+        "migrate-down": "dotenv -- cross-var \"echo DB_HOST = %DB_HOST%\n echo DB_NAME = %DB_NAME%\" && migrate-mongo down"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "nodemon": "^1.18.3"
+        "nodemon": "^1.18.3",
+        "@swc/cli": "^0.1.57",
+        "@swc/core": "^1.2.247",
+        "@swc/jest": "^0.2.22"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
@@ -21,6 +28,9 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
         "express": "^4.16.3",
+        "lodash": "^4.17.15",
+        "env-var": "^7.3.0",
+        "migrate-mongo": "8.1.4",
         "express-handlebars": "^3.0.0",
         "express-session": "^1.17.2",
         "express-validator": "^6.2.0",
