@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import ReactPDF from '@react-pdf/renderer';
+// import ReactPDF from '@react-pdf/renderer';
 
 // Page
 import Register from "./pages/auth/Register";
@@ -39,6 +39,7 @@ import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
 import ProductDView from "./pages/mainhome/product/ProductDView";
 import WithdrawCreate from "./pages/mainhome/disbursement/WithdrawCreate";
+import ManageUser from "./pages/admin/ManageUser";
 
 
 function App() {
@@ -93,6 +94,13 @@ function App() {
             </AdminRoute>
           }
         />
+        <Route
+        path="/admin/manage-users"
+        element={
+          <AdminRoute>
+            <ManageUser />
+          </AdminRoute>
+        } />
         <Route
           path="/productview"
           element={
