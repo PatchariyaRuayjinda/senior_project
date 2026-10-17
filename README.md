@@ -4,9 +4,11 @@ Reworking the undergraduate inventory project as a place to practise building
 features and working with AI. The first working slice is authentication.
 
 - `backend/`: Elysia + Bun + TypeScript, MongoDB native driver, JOSE and Argon2id.
-- `frontend/`: React 18 + Vite + TypeScript.
+- `frontend/`: React 18 + Vite + TypeScript + Ant Design (Clear Blue).
 - `legacy/`: the original application, preserved as reference.
 - [Auth design and tradeoffs](docs/auth.md): token lifecycle, authorization and tests.
+- [ABC workflow](docs/ux/abc-stock/README.md): agreed behavior and Clear Blue layout.
+- [ABC UI implementation](docs/ux/abc-stock/implementation.md): interactive sample workflow, data limits and checks.
 
 ## Run locally
 
@@ -83,8 +85,11 @@ are written to the ignored `frontend/test-results/` directory.
 
 ## Current boundary
 
-The active app contains login, automatic refresh, logout, account details and an
-admin-only user list. Inventory workflows remain in `legacy/` until rebuilt.
+The active app contains login, automatic refresh, logout, account details, an
+admin-only user list and an interactive ABC/location UI built with Ant Design.
+ABC uses clearly labeled, in-memory sample data; reload or logout resets stock
+and relocation changes. Inventory APIs and MongoDB persistence are not yet built.
+The original inventory implementation remains in `legacy/` as reference.
 This is a local learning setup; the Docker database is bound to loopback.
 For hosting, serve the frontend and `/api` under one HTTPS origin and use the
 production cookie configuration described in [the auth design](docs/auth.md).
