@@ -16,23 +16,23 @@ test("login, cross-tab restoration, reload, server-side logout and role enforcem
   await page.getByLabel("รหัสผ่าน").fill("browser-test-password");
   await page.getByRole("button", { name: "เข้าสู่ระบบ" }).click();
   await expect(
-    page.getByRole("heading", { name: "สวัสดี, admin" }),
+    page.getByRole("heading", { name: "วิเคราะห์ ABC และจัดตำแหน่ง" }),
   ).toBeVisible();
 
   // Cookie is shared, while each tab must recover its own in-memory access token.
   const secondTab = await context.newPage();
   await Promise.all([page.reload(), secondTab.goto("/")]);
   await expect(
-    page.getByRole("heading", { name: "สวัสดี, admin" }),
+    page.getByRole("heading", { name: "วิเคราะห์ ABC และจัดตำแหน่ง" }),
   ).toBeVisible();
   await expect(
-    secondTab.getByRole("heading", { name: "สวัสดี, admin" }),
+    secondTab.getByRole("heading", { name: "วิเคราะห์ ABC และจัดตำแหน่ง" }),
   ).toBeVisible();
   expect(
     await page.evaluate(() => [localStorage.length, sessionStorage.length]),
   ).toEqual([0, 0]);
 
-  await page.getByRole("button", { name: /ผู้ใช้งาน/ }).click();
+  await page.getByRole("menuitem", { name: /ผู้ใช้งาน/ }).click();
   await expect(
     page.getByRole("cell", { name: "staff", exact: true }),
   ).toBeVisible();
@@ -60,11 +60,13 @@ test("login, cross-tab restoration, reload, server-side logout and role enforcem
   await page.getByLabel("รหัสผ่าน").fill("browser-test-password");
   await page.getByRole("button", { name: "เข้าสู่ระบบ" }).click();
   await expect(
-    page.getByRole("heading", { name: "สวัสดี, staff" }),
+    page.getByRole("heading", { name: "วิเคราะห์ ABC และจัดตำแหน่ง" }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: /ผู้ใช้งาน/ })).toHaveCount(0);
+  await expect(page.getByRole("menuitem", { name: /ผู้ใช้งาน/ })).toHaveCount(
+    0,
+  );
   await expect(
-    secondTab.getByRole("heading", { name: "สวัสดี, staff" }),
+    secondTab.getByRole("heading", { name: "วิเคราะห์ ABC และจัดตำแหน่ง" }),
   ).toBeVisible();
   const staffRefresh = await page.request.post("/api/auth/refresh", {
     headers: { Origin: "http://localhost:4173" },
