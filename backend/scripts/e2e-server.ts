@@ -1,22 +1,25 @@
 // Only the browser tests use this entry point. It never connects to MONGODB_URI.
 import { randomBytes } from 'node:crypto';
 import { resolve } from 'node:path';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { MongoClient } from 'mongodb';
 import { createApp } from '../src/app';
 import { createAuthService, hashPassword } from '../src/auth/service';
 import { loadConfig } from '../src/config';
-import { collections, initializeDatabase } from '../src/database';
+import { collections } from '../src/database';
+import { migrateTestDatabase } from '../tests/helpers/migrations';
+import { assertMigrationsReady } from '../src/migrations';
 
 process.env.MONGOMS_DOWNLOAD_DIR = resolve(import.meta.dir, '../../.cache/mongodb');
 const config = loadConfig({
     PORT: '3101', APP_ORIGIN: 'http://localhost:4173',
     JWT_ACCESS_SECRET: randomBytes(32).toString('hex'), JWT_REFRESH_SECRET: randomBytes(32).toString('hex'),
 });
-const mongo = await MongoMemoryServer.create({ binary: { version: '7.0.24' } });
+const mongo = await MongoMemoryReplSet.create({ binary: { version: '7.0.24' }, replSet: { count: 1 } });
 const client = await new MongoClient(mongo.getUri()).connect();
 const db = client.db('browser_tests');
-await initializeDatabase(db);
+await migrateTestDatabase(mongo.getUri(), 'browser_tests');
+await assertMigrationsReady(db);
 const passwordHash = await hashPassword('browser-test-password');
 await collections(db).users.insertMany([
     { _id: 'test-admin', username: 'admin', passwordHash, role: 'admin', enabled: true, createdAt: new Date() },

@@ -1,18 +1,19 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'bun:test';
 import { createHash, randomUUID } from 'node:crypto';
 import { resolve } from 'node:path';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { MongoClient, type Db } from 'mongodb';
 import { SignJWT } from 'jose';
 import { createApp } from '../src/app';
 import { createAuthService, hashPassword } from '../src/auth/service';
 import { loadConfig } from '../src/config';
-import { collections, initializeDatabase } from '../src/database';
+import { collections } from '../src/database';
+import { migrateTestDatabase } from './helpers/migrations';
 
 // A real, isolated mongod exercises atomic rotation and TTL queries without touching user data.
 process.env.MONGOMS_DOWNLOAD_DIR = resolve(import.meta.dir, '../../.cache/mongodb');
 const config = loadConfig({ JWT_ACCESS_SECRET: 'test-access-secret-with-at-least-32-bytes', JWT_REFRESH_SECRET: 'test-refresh-secret-with-at-least-32-bytes' });
-let mongo: MongoMemoryServer;
+let mongo: MongoMemoryReplSet;
 let client: MongoClient;
 let db: Db;
 let app: ReturnType<typeof createApp>;
@@ -23,10 +24,10 @@ const cookieName = 'inventory_refresh';
 const hash = (value: string) => createHash('sha256').update(value).digest('hex');
 
 beforeAll(async () => {
-    mongo = await MongoMemoryServer.create({ binary: { version: '7.0.24' } });
+    mongo = await MongoMemoryReplSet.create({ binary: { version: '7.0.24' }, replSet: { count: 1 } });
     client = await new MongoClient(mongo.getUri()).connect();
     db = client.db('auth_tests');
-    await initializeDatabase(db);
+    await migrateTestDatabase(mongo.getUri(), 'auth_tests');
     passwordHash = await hashPassword(password);
 }, 60000);
 
