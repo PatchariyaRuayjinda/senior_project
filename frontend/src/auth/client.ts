@@ -126,12 +126,21 @@ export function logout() {
   });
 }
 
-export async function apiRequest<T>(path: string): Promise<T> {
+export async function apiRequest<T>(
+  path: string,
+  options: RequestInit = {},
+): Promise<T> {
   if (!accessToken) await refreshSession();
+  const headers = new Headers(options.headers);
+  headers.delete("authorization");
   const send = () =>
     fetch(path, {
+      ...options,
       credentials: "same-origin",
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: {
+        ...Object.fromEntries(headers),
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
   const usedToken = accessToken;
   let response = await send();

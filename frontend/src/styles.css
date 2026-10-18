@@ -418,6 +418,85 @@ a:focus-visible {
   max-width: 900px;
   padding: 24px;
 }
+.master-data-section {
+  min-width: 0;
+  padding: 24px;
+  background: white;
+  border: 1px solid #d4dce8;
+  border-radius: 8px;
+}
+.master-data-heading,
+.master-data-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.master-data-toolbar {
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.master-data-toolbar .ant-input-search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 440px;
+}
+.master-data-toolbar .ant-select {
+  min-width: 150px;
+}
+.master-data-feedback {
+  margin-bottom: 20px;
+}
+.master-data-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+}
+.master-data-form-grid .ant-input-number,
+.master-data-form-grid .ant-picker {
+  width: 100%;
+}
+.lot-code {
+  overflow-wrap: anywhere;
+}
+.master-code-cell {
+  overflow-wrap: anywhere;
+}
+.history-event {
+  width: 100%;
+  padding-block: 16px;
+  border-bottom: 1px solid #e7ecf4;
+}
+.history-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.master-data-history .ant-descriptions-item-content {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .master-data-section {
+    padding: 16px;
+  }
+  .master-data-heading {
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 0;
+  }
+  .master-data-toolbar .ant-input-search {
+    max-width: none;
+    flex-basis: 100%;
+  }
+  .master-data-toolbar .ant-btn,
+  .master-data-toolbar .ant-select {
+    min-height: 44px;
+  }
+  .master-data-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .account-title {
   margin-bottom: 20px;
   justify-content: space-between;

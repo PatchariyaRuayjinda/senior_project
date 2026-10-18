@@ -9,6 +9,7 @@ import { loadConfig } from '../src/config';
 import { collections } from '../src/database';
 import { migrateTestDatabase } from '../tests/helpers/migrations';
 import { assertMigrationsReady } from '../src/migrations';
+import { createInventoryService } from '../src/inventory/service';
 
 process.env.MONGOMS_DOWNLOAD_DIR = resolve(import.meta.dir, '../../.cache/mongodb');
 const config = loadConfig({
@@ -25,7 +26,8 @@ await collections(db).users.insertMany([
     { _id: 'test-admin', username: 'admin', passwordHash, role: 'admin', enabled: true, createdAt: new Date() },
     { _id: 'test-staff', username: 'staff', passwordHash, role: 'staff', enabled: true, createdAt: new Date() },
 ]);
-const app = createApp(await createAuthService(db, config), config).listen({ hostname: '127.0.0.1', port: config.port });
+const app = createApp(await createAuthService(db, config), config, undefined, createInventoryService(db, client))
+    .listen({ hostname: '127.0.0.1', port: config.port });
 async function shutdown() {
     await app.stop();
     await client.close();

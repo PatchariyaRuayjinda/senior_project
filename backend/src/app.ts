@@ -4,8 +4,10 @@ import type { Config } from './config';
 import type { AuthService } from './auth/service';
 import { createRateLimiter } from './auth/rateLimit';
 import { HttpError } from './errors';
+import { createInventoryRoutes } from './inventory/routes';
+import type { InventoryService } from './inventory/service';
 
-export function createApp(auth: AuthService, config: Config, now = () => Date.now()) {
+export function createApp(auth: AuthService, config: Config, now = () => Date.now(), inventory?: InventoryService) {
     const rateLimit = createRateLimiter(now);
     const cookieName = config.secureCookies ? '__Host-inventory_refresh' : 'inventory_refresh';
     const cookieOptions = { httpOnly: true, secure: config.secureCookies, sameSite: 'strict' as const, path: '/' };
@@ -79,5 +81,6 @@ export function createApp(auth: AuthService, config: Config, now = () => Date.no
             return undefined;
         })
         .get('/api/auth/me', async ({ request }) => ({ user: await auth.authenticate(request.headers.get('authorization')) }))
-        .get('/api/admin/users', async ({ request }) => ({ users: await auth.listUsers(request.headers.get('authorization')) }));
+        .get('/api/admin/users', async ({ request }) => ({ users: await auth.listUsers(request.headers.get('authorization')) }))
+        .use(inventory ? createInventoryRoutes(auth, inventory) : new Elysia());
 }

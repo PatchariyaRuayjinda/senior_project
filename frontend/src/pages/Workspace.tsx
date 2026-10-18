@@ -23,14 +23,29 @@ import {
   MenuOutlined,
   TeamOutlined,
   UserOutlined,
+  DatabaseOutlined,
+  TagsOutlined,
+  EnvironmentOutlined,
+  InboxOutlined,
 } from "@ant-design/icons";
 import { apiRequest, errorMessage, logout, type User } from "../auth/client";
 import { AbcWorkbench } from "../inventory/AbcWorkbench";
 import { createDemoInventory } from "../inventory/model";
+import {
+  MasterDataPage,
+  masterDataTitles,
+  type MasterDataView,
+} from "../master-data/MasterDataPage";
 
 const roleLabel = (role: User["role"]) =>
   role === "admin" ? "ผู้ดูแลระบบ" : "เจ้าหน้าที่คลัง";
-type Page = "abc" | "account" | "users";
+type Page = "abc" | "account" | "users" | MasterDataView;
+const pageTitles: Record<Page, string> = {
+  abc: "วิเคราะห์ ABC",
+  account: "บัญชีของฉัน",
+  users: "ผู้ใช้งาน",
+  ...masterDataTitles,
+};
 export function Workspace({ user }: { user: User }) {
   const [page, setPage] = useState<Page>("abc");
   const [inventory, setInventory] = useState(createDemoInventory);
@@ -40,13 +55,28 @@ export function Workspace({ user }: { user: User }) {
   const [busy, setBusy] = useState(false);
   const screens = Grid.useBreakpoint();
   const mobile = !screens.lg;
-  const title =
-    page === "abc"
-      ? "วิเคราะห์ ABC"
-      : page === "account"
-        ? "บัญชีของฉัน"
-        : "ผู้ใช้งาน";
+  const title = pageTitles[page];
   const items: MenuProps["items"] = [
+    {
+      key: "products",
+      label: masterDataTitles.products,
+      icon: <DatabaseOutlined aria-hidden />,
+    },
+    {
+      key: "lots",
+      label: masterDataTitles.lots,
+      icon: <TagsOutlined aria-hidden />,
+    },
+    {
+      key: "locations",
+      label: masterDataTitles.locations,
+      icon: <EnvironmentOutlined aria-hidden />,
+    },
+    {
+      key: "pallets",
+      label: masterDataTitles.pallets,
+      icon: <InboxOutlined aria-hidden />,
+    },
     {
       key: "abc",
       label: "วิเคราะห์ ABC",
@@ -101,6 +131,10 @@ export function Workspace({ user }: { user: User }) {
     if (
       key === "abc" ||
       key === "account" ||
+      key === "products" ||
+      key === "lots" ||
+      key === "locations" ||
+      key === "pallets" ||
       (key === "users" && user.role === "admin")
     ) {
       setPage(key);
@@ -175,7 +209,12 @@ export function Workspace({ user }: { user: User }) {
               title={error}
             />
           )}
-          {page === "abc" ? (
+          {page === "products" ||
+          page === "lots" ||
+          page === "locations" ||
+          page === "pallets" ? (
+            <MasterDataPage key={page} view={page} user={user} />
+          ) : page === "abc" ? (
             <AbcWorkbench inventory={inventory} onChange={setInventory} />
           ) : (
             <>

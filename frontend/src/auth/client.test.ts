@@ -20,6 +20,36 @@ afterEach(() => {
 });
 
 describe("browser session lifecycle", () => {
+  it("preserves a mutation body and idempotency key when renewing an expired token", async () => {
+    fetchMock
+      .mockResolvedValueOnce(session("old"))
+      .mockResolvedValueOnce(unauthorized())
+      .mockResolvedValueOnce(session("new"))
+      .mockResolvedValueOnce(Response.json({ product: { id: "p1" } }));
+    await client.login("admin", "test-password");
+    const body = JSON.stringify({ sku: "PEN-001" });
+    await client.apiRequest("/api/inventory/products", {
+      method: "POST",
+      body,
+      headers: {
+        "Content-Type": "application/json",
+        "Idempotency-Key": "same-change",
+      },
+    });
+    const attempts = fetchMock.mock.calls.filter(
+      ([path]) => path === "/api/inventory/products",
+    );
+    expect(attempts).toHaveLength(2);
+    for (const [, options] of attempts) {
+      expect(options).toMatchObject({ method: "POST", body });
+      expect(new Headers(options?.headers).get("idempotency-key")).toBe(
+        "same-change",
+      );
+    }
+    expect(new Headers(attempts[1]?.[1]?.headers).get("authorization")).toBe(
+      "Bearer new",
+    );
+  });
   it("keeps access tokens out of local/session storage and shares a single refresh across concurrent requests", async () => {
     let refreshes = 0;
     fetchMock.mockImplementation(async (path, options) => {
