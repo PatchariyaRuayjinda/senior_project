@@ -71,6 +71,20 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+.env.*
+!.env.example
+.tools/
+.cache/
+.yarn/
+playwright-report/
+test-results/
+# Local design-tool state and draft artifacts
+.impeccable/
+docs/ux/abc-stock/index.html
+docs/ux/abc-stock/wireframes/
+docs/ux/abc-stock/themes/
+docs/ux/abc-stock/*.png
+docs/ux/abc-stock/*.pdf
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
