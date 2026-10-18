@@ -1,44 +1,29 @@
-import { useEffect, useState } from "react";
-import {
-  Alert,
-  Avatar,
-  Breadcrumb,
-  Button,
-  Descriptions,
-  Drawer,
-  Empty,
-  Grid,
-  Layout,
-  Menu,
-  Skeleton,
-  Space,
-  Table,
-  Tag,
-  Typography,
-  type MenuProps,
-} from "antd";
 import {
   BarChartOutlined,
-  LogoutOutlined,
-  MenuOutlined,
-  TeamOutlined,
-  UserOutlined,
   DatabaseOutlined,
-  TagsOutlined,
   EnvironmentOutlined,
   InboxOutlined,
+  TagsOutlined,
+  TeamOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { apiRequest, errorMessage, logout, type User } from "../auth/client";
-import { AbcWorkbench } from "../inventory/AbcWorkbench";
-import { createDemoInventory } from "../inventory/model";
+import { Alert, Grid, type MenuProps } from "antd";
+import { useEffect, useState } from "react";
+import { PageHeading } from "../components/molecules/PageHeading";
+import { WorkspaceNavigation } from "../components/organisms/WorkspaceNavigation";
+import { WorkspaceTemplate } from "../components/templates/WorkspaceTemplate";
+import { AbcWorkbench } from "../features/abc/AbcWorkbench";
+import { createDemoInventory } from "../features/abc/model";
+import { errorMessage, logout, type User } from "../features/auth/api/client";
+import { AccountPanel } from "../features/auth/components/AccountPanel";
+import { roleLabel } from "../features/auth/labels";
+import { UsersPanel } from "../features/users/UsersPanel";
 import {
   MasterDataPage,
   masterDataTitles,
   type MasterDataView,
-} from "../master-data/MasterDataPage";
+} from "./master-data/MasterDataPage";
 
-const roleLabel = (role: User["role"]) =>
-  role === "admin" ? "ผู้ดูแลระบบ" : "เจ้าหน้าที่คลัง";
 type Page = "abc" | "account" | "users" | MasterDataView;
 const pageTitles: Record<Page, string> = {
   abc: "วิเคราะห์ ABC",
@@ -50,7 +35,6 @@ export function Workspace({ user }: { user: User }) {
   const [page, setPage] = useState<Page>("abc");
   const [inventory, setInventory] = useState(createDemoInventory);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [users, setUsers] = useState<User[] | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const screens = Grid.useBreakpoint();
@@ -98,22 +82,6 @@ export function Workspace({ user }: { user: User }) {
       : []),
   ];
   useEffect(() => {
-    if (page !== "users") return;
-    let active = true;
-    setError("");
-    setUsers(null);
-    apiRequest<{ users: User[] }>("/api/admin/users")
-      .then((result) => {
-        if (active) setUsers(result.users);
-      })
-      .catch((failure) => {
-        if (active) setError(errorMessage(failure));
-      });
-    return () => {
-      active = false;
-    };
-  }, [page]);
-  useEffect(() => {
     document.title = `Inventory · ${title}`;
   }, [title]);
   async function signOut() {
@@ -142,155 +110,49 @@ export function Workspace({ user }: { user: User }) {
       setMenuOpen(false);
     }
   }
-  const navigation = (
-    <div className="navigation-content">
-      <Button className="brand" type="text" onClick={() => navigate("abc")}>
-        inventory.
-      </Button>
-      <nav aria-label="เมนูหลัก">
-        <Menu
-          mode="inline"
-          selectedKeys={[page]}
-          items={items}
-          onClick={({ key }) => navigate(key)}
-        />
-      </nav>
-      <div className="sidebar-account">
-        <Avatar icon={<UserOutlined aria-hidden />} />
-        <div>
-          <Typography.Text strong>{user.username}</Typography.Text>
-          <Typography.Text type="secondary">
-            {roleLabel(user.role)}
-          </Typography.Text>
-        </div>
-      </div>
-    </div>
-  );
   return (
-    <Layout className="workspace">
-      {!mobile && (
-        <Layout.Sider theme="light" width={212} className="app-sidebar">
-          {navigation}
-        </Layout.Sider>
+    <WorkspaceTemplate
+      title={title}
+      mobile={mobile}
+      menuOpen={menuOpen}
+      onOpenMenu={() => setMenuOpen(true)}
+      onCloseMenu={() => setMenuOpen(false)}
+      busy={busy}
+      onSignOut={signOut}
+      navigation={
+        <WorkspaceNavigation
+          username={user.username}
+          role={roleLabel(user.role)}
+          selectedKey={page}
+          items={items}
+          onHome={() => navigate("abc")}
+          onNavigate={navigate}
+        />
+      }
+    >
+      {error && (
+        <Alert className="workspace-error" type="error" showIcon title={error} />
       )}
-      <Layout className="workspace-main">
-        <Layout.Header className="workspace-header">
-          <Space size={12}>
-            {mobile && (
-              <Button
-                icon={<MenuOutlined aria-hidden />}
-                type="text"
-                aria-label="เปิดเมนู"
-                onClick={() => setMenuOpen(true)}
-              />
-            )}
-            {mobile ? (
-              <Typography.Text strong className="mobile-brand">
-                inventory.
-              </Typography.Text>
-            ) : (
-              <Breadcrumb items={[{ title: "คลังสินค้า" }, { title }]} />
-            )}
-          </Space>
-          <Button
-            icon={<LogoutOutlined aria-hidden />}
-            loading={busy}
-            onClick={signOut}
-          >
-            ออกจากระบบ
-          </Button>
-        </Layout.Header>
-        <Layout.Content className="workspace-content">
-          {error && (
-            <Alert
-              className="workspace-error"
-              type="error"
-              showIcon
-              title={error}
-            />
-          )}
-          {page === "products" ||
-          page === "lots" ||
-          page === "locations" ||
-          page === "pallets" ? (
-            <MasterDataPage key={page} view={page} user={user} />
-          ) : page === "abc" ? (
-            <AbcWorkbench inventory={inventory} onChange={setInventory} />
-          ) : (
-            <>
-              <div className="page-heading">
-                <Typography.Title level={1}>
-                  {page === "account"
-                    ? `สวัสดี, ${user.username}`
-                    : "ผู้ใช้งาน"}
-                </Typography.Title>
-                <Typography.Paragraph type="secondary">
-                  {page === "account"
-                    ? "ยินดีต้อนรับสู่พื้นที่ทำงานของคุณ"
-                    : "บัญชีผู้ใช้และสิทธิ์การใช้งานในระบบ"}
-                </Typography.Paragraph>
-              </div>
-              {page === "account" ? (
-                <section className="account-section" aria-label="ข้อมูลบัญชี">
-                  <Space className="account-title">
-                    <Typography.Title level={2}>ข้อมูลบัญชี</Typography.Title>
-                    <Tag className="status-aligned">เข้าสู่ระบบแล้ว</Tag>
-                  </Space>
-                  <Descriptions
-                    column={1}
-                    items={[
-                      {
-                        key: "username",
-                        label: "ชื่อผู้ใช้",
-                        children: user.username,
-                      },
-                      {
-                        key: "role",
-                        label: "สิทธิ์การใช้งาน",
-                        children: roleLabel(user.role),
-                      },
-                    ]}
-                  />
-                </section>
-              ) : (
-                <section
-                  className="users-section"
-                  aria-label="รายชื่อผู้ใช้งาน"
-                >
-                  {!users && !error ? (
-                    <Skeleton active title={false} paragraph={{ rows: 4 }} />
-                  ) : users ? (
-                    <Table<User>
-                      rowKey="id"
-                      dataSource={users}
-                      pagination={false}
-                      columns={[
-                        { title: "ชื่อผู้ใช้", dataIndex: "username" },
-                        {
-                          title: "สิทธิ์การใช้งาน",
-                          dataIndex: "role",
-                          render: (role) => roleLabel(role),
-                        },
-                      ]}
-                    />
-                  ) : (
-                    <Empty description="โหลดผู้ใช้งานไม่สำเร็จ ลองเปิดหน้านี้อีกครั้ง" />
-                  )}
-                </section>
-              )}
-            </>
-          )}
-        </Layout.Content>
-      </Layout>
-      <Drawer
-        title="เมนูหลัก"
-        placement="left"
-        size={280}
-        open={mobile && menuOpen}
-        onClose={() => setMenuOpen(false)}
-      >
-        {navigation}
-      </Drawer>
-    </Layout>
+      {page === "products" ||
+      page === "lots" ||
+      page === "locations" ||
+      page === "pallets" ? (
+        <MasterDataPage key={page} view={page} user={user} />
+      ) : page === "abc" ? (
+        <AbcWorkbench inventory={inventory} onChange={setInventory} />
+      ) : (
+        <>
+          <PageHeading
+            title={page === "account" ? `สวัสดี, ${user.username}` : "ผู้ใช้งาน"}
+            description={
+              page === "account"
+                ? "ยินดีต้อนรับสู่พื้นที่ทำงานของคุณ"
+                : "บัญชีผู้ใช้และสิทธิ์การใช้งานในระบบ"
+            }
+          />
+          {page === "account" ? <AccountPanel user={user} /> : <UsersPanel />}
+        </>
+      )}
+    </WorkspaceTemplate>
   );
 }

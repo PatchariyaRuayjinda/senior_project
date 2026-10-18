@@ -5,11 +5,12 @@ withdrawals, picking and approvals remain subsequent phases.
 
 ## Structure
 
-- `backend/src/inventory/`: typed records, calendar dates, one transaction runner,
-  master-data rules and HTTP routes. Rules live behind the inventory service;
-  routes authenticate and validate requests. No general repository framework.
-- `frontend/src/master-data/`: API types/client and separate product, lot,
-  location and pallet screens using existing Ant Design/Clear Blue controls.
+- `backend/src/inventory/`: Hexagonal domain, application use cases/ports and
+  HTTP/MongoDB adapters; explicit wiring in `backend/src/composition.ts`.
+- `frontend/src/features/master-data/`: feature API, types, hooks and editor/table
+  components. `frontend/src/pages/master-data/` composes these with shared Atomic
+  Design UI under `frontend/src/components/` and the existing Clear Blue theme.
+- See [architecture](architecture.md) for dependency rules and a request trace.
 - Add migration `202610180004-master-data.js` and a new frozen schema snapshot.
   Preserve applied migrations and `migration-support/v1.js`.
 

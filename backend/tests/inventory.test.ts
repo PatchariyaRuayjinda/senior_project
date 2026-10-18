@@ -1,16 +1,16 @@
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
-import { resolve } from 'node:path';
-import { randomUUID } from 'node:crypto';
-import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { MongoClient, type Db } from 'mongodb';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
+import { randomUUID } from 'node:crypto';
+import { resolve } from 'node:path';
 import { createApp } from '../src/app';
-import { createAuthService, hashPassword } from '../src/auth/service';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { hashPassword } from '../src/auth/adapters/security/passwords';
+import { createAuthService, createInventoryService } from '../src/composition';
 import { loadConfig } from '../src/config';
-import { collections } from '../src/database';
+import { inventoryCollections } from '../src/inventory/adapters/mongodb/collections';
+import { calendarDate, expiryBoundary } from '../src/inventory/domain/dates';
 import { migrateTestDatabase } from './helpers/migrations';
-import { createInventoryService } from '../src/inventory/service';
-import { inventoryCollections } from '../src/inventory/records';
-import { calendarDate, expiryBoundary } from '../src/inventory/dates';
 
 process.env.MONGOMS_DOWNLOAD_DIR = resolve(import.meta.dir, '../../.cache/mongodb');
 const config = loadConfig({

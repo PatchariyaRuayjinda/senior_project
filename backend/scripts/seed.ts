@@ -1,7 +1,9 @@
 import { randomUUID } from 'node:crypto';
-import { hashPassword } from '../src/auth/service';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { hashPassword } from '../src/auth/adapters/security/passwords';
 import { loadConfig } from '../src/config';
-import { collections, connectDatabase, type Role } from '../src/database';
+import { connectDatabase } from '../src/database';
+import type { Role } from '../src/shared/domain/actor';
 
 const accounts: { username: string; password: string; role: Role }[] = [
     { username: process.env.ADMIN_USERNAME ?? 'admin', password: process.env.ADMIN_PASSWORD ?? '', role: 'admin' },

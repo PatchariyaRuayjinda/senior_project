@@ -1,12 +1,12 @@
 import { afterAll, beforeAll, expect, test } from 'bun:test';
+import { MongoClient } from 'mongodb';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { MongoClient } from 'mongodb';
-import { collections } from '../src/database';
-import { createAuthService, hashPassword } from '../src/auth/service';
-import { createInventoryService } from '../src/inventory/service';
 import { createApp } from '../src/app';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { hashPassword } from '../src/auth/adapters/security/passwords';
+import { createAuthService, createInventoryService } from '../src/composition';
 import { loadConfig } from '../src/config';
 import { migrateTestDatabase } from './helpers/migrations';
 

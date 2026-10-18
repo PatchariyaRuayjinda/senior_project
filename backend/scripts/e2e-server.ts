@@ -1,15 +1,15 @@
 // Only the browser tests use this entry point. It never connects to MONGODB_URI.
+import { MongoClient } from 'mongodb';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { randomBytes } from 'node:crypto';
 import { resolve } from 'node:path';
-import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { MongoClient } from 'mongodb';
 import { createApp } from '../src/app';
-import { createAuthService, hashPassword } from '../src/auth/service';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { hashPassword } from '../src/auth/adapters/security/passwords';
+import { createAuthService, createInventoryService } from '../src/composition';
 import { loadConfig } from '../src/config';
-import { collections } from '../src/database';
-import { migrateTestDatabase } from '../tests/helpers/migrations';
 import { assertMigrationsReady } from '../src/migrations';
-import { createInventoryService } from '../src/inventory/service';
+import { migrateTestDatabase } from '../tests/helpers/migrations';
 
 process.env.MONGOMS_DOWNLOAD_DIR = resolve(import.meta.dir, '../../.cache/mongodb');
 const config = loadConfig({

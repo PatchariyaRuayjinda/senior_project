@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { createInventoryService } from '../src/composition';
 import { assertMigrationsReady } from '../src/migrations';
-import { collections } from '../src/database';
-import { createInventoryService } from '../src/inventory/service';
 
 const uri = process.env.MONGODB_URI;
 const database = process.env.MONGODB_DATABASE;

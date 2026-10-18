@@ -12,7 +12,8 @@
     "migrate-up": "node --env-file-if-exists=.env scripts/migrate.js up",
     "migrate-down": "node --env-file-if-exists=.env scripts/migrate.js down",
     "typecheck": "tsc --noEmit",
-    "test": "bun test --timeout 60000"
+    "test": "bun test --timeout 60000",
+    "check:architecture": "node ../scripts/check-architecture.mjs backend"
   },
   "dependencies": {
     "@sinclair/typebox": "^0.34.0",

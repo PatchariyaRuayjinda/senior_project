@@ -1,13 +1,14 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'bun:test';
+import { SignJWT } from 'jose';
+import { MongoClient, type Db } from 'mongodb';
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { createHash, randomUUID } from 'node:crypto';
 import { resolve } from 'node:path';
-import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { MongoClient, type Db } from 'mongodb';
-import { SignJWT } from 'jose';
 import { createApp } from '../src/app';
-import { createAuthService, hashPassword } from '../src/auth/service';
+import { collections } from '../src/auth/adapters/mongodb/collections';
+import { hashPassword } from '../src/auth/adapters/security/passwords';
+import { createAuthService } from '../src/composition';
 import { loadConfig } from '../src/config';
-import { collections } from '../src/database';
 import { migrateTestDatabase } from './helpers/migrations';
 
 // A real, isolated mongod exercises atomic rotation and TTL queries without touching user data.
